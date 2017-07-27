@@ -1,0 +1,27 @@
+{
+  "name": "challengeoftheday",
+  "version": "1.0.0",
+  "description": "Theme generator for the #challenges channel of the MadisonGameDev Slack Group",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hartalex/ChallengeOfTheDay.git"
+  },
+  "author": "Alex Hart",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/hartalex/ChallengeOfTheDay/issues"
+  },
+  "homepage": "https://github.com/hartalex/ChallengeOfTheDay#readme",
+  "devDependencies": {
+    "eslint": "^4.3.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1"
+  }
+}
