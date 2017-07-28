@@ -6,7 +6,7 @@ if (config.slackUrl === '') {
   process.exit(1)
 }
 
-themeManager.then(function (data) {
+themeManager().then(function (data) {
   console.log('Todays Theme is ' + data)
 }).catch(function (error) {
   console.error(error)
