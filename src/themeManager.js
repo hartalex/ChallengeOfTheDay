@@ -1,15 +1,12 @@
 module.exports = function (themes) {
   return new Promise(
     function (resolve, reject) {
-      var success = false
-      var value = ''
-      success = true
+      if (!Array.isArray(themes)) {
+        reject(new Error('themes parameter is not an array'))
+      }
       if (themes.length === 0) {
-        reject(new Error('themes.js array is empty'))
+        reject(new Error('themes parameter array is empty'))
       }
-      value = themes[themes.length - 1]
-      if (success) {
-        resolve(value)
-      }
+      resolve(themes[Math.floor(Math.random() * themes.length)])
     })
 }
