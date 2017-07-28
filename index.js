@@ -8,7 +8,9 @@ if (config.slackUrl === '') {
   process.exit(1)
 }
 
+// Choose a theme
 themeManager(themes).then(function (theme) {
+  // Now that we have a theme, send it to slack
   var slackData = {'text': 'Today\'s challenge theme is *' + theme + '*\n<!here|here>'}
   request({
     url: config.slackUrl,
@@ -17,17 +19,15 @@ themeManager(themes).then(function (theme) {
     body: slackData
   }, function (error, response, body) {
     if (!error && response.statusCode === 200) {
+      // Sending to Slack was successful
       console.log(body)
     } else {
+      // Sending to Slack failed
       throw new Error('Error: ' + error + ' statusCode: ' + response.statusCode + ' body: ' + body)
     }
   })
 }).catch(function (error) {
+  // handle errors
   console.error(error)
   process.exit(1)
 })
-
-// 1. Get The Theme of the Day
-//   On failure notify someone.
-// 2. Post Theme in Slack
-//   On failure notify someone.
