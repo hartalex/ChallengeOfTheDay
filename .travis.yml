@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - "node"
+script:
+    - yarn run lint
+    - yarn run test
+    - yarn run coverage
+notifications:
+    slack: hartcode:GqPCaLxnPqXfPJBMjJbEvG81
+addons:
+  code_climate:
+    repo_token: 88e230696fc91873bf0c15bee7de1fcdad7d63b351ffdeae823f68f14ef20f2a
+after_success:
+  - npm install -g codeclimate-test-reporter
+  - codeclimate-test-reporter < lcov.info
