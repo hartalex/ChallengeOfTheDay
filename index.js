@@ -1,4 +1,6 @@
+const request = require('request')
 const config = require('./config')
+const themes = require('./src/themes')
 const themeManager = require('./src/themeManager')
 
 if (config.slackUrl === '') {
@@ -6,8 +8,20 @@ if (config.slackUrl === '') {
   process.exit(1)
 }
 
-themeManager().then(function (data) {
-  console.log('Todays Theme is ' + data)
+themeManager(themes).then(function (theme) {
+  var slackData = {'text': 'Today\'s challenge theme is *' + theme + '*\n<!here|here>'}
+  request({
+    url: config.slackUrl,
+    method: 'POST',
+    json: true,
+    body: slackData
+  }, function (error, response, body) {
+    if (!error && response.statusCode === 200) {
+      console.log(body)
+    } else {
+      throw new Error('Error: ' + error + ' statusCode: ' + response.statusCode + ' body: ' + body)
+    }
+  })
 }).catch(function (error) {
   console.error(error)
   process.exit(1)
