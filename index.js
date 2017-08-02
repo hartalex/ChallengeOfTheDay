@@ -1,30 +1,21 @@
-const request = require('request')
 const config = require('./config')
 const themes = require('./src/themes')
 const themeManager = require('./src/themeManager')
+const historyManager = require('./src/historyManager')(config.historyFile, config.historyMax)
+const slackManager = require('./src/slackManager')(config.slackUrl)
 
 if (config.slackUrl === '') {
   console.error('Slack URL is not defined in config.js')
   process.exit(1)
 }
-
-// Choose a theme
-themeManager(themes).then(function (theme) {
-  // Now that we have a theme, send it to slack
-  var slackData = {'text': 'Today\'s challenge theme is *' + theme + '*\n<!here|here> https://www.pinterest.com/search/pins/?q=' + theme}
-  request({
-    url: config.slackUrl,
-    method: 'POST',
-    json: true,
-    body: slackData
-  }, function (error, response, body) {
-    if (!error && response.statusCode === 200) {
-      // Sending to Slack was successful
-      console.log(body)
-    } else {
-      // Sending to Slack failed
-      throw new Error('Error: ' + error + ' statusCode: ' + response.statusCode + ' body: ' + body)
-    }
+historyManager.LoadHistory().then(function (history) {
+  // Choose a theme
+  themeManager(themes, history).then(
+    // Post the theme to slack
+    slackManager.SlackPost
+  ).then(function (theme) {
+    // Update and save history
+    historyManager.AddHistory(theme, history).then(historyManager.SaveHistory(history))
   })
 }).catch(function (error) {
   // handle errors
