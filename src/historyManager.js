@@ -28,8 +28,6 @@ module.exports = function (historyFile, historyMax) {
     },
     SaveHistory: function (history) {
       return new Promise(function (resolve, reject) {
-        console.log('file: ' + historyFile)
-        console.log('hist ' + history)
         // Save history
         fs.writeFile(historyFile, JSON.stringify(history), function (err) {
           if (err) {
