@@ -11,7 +11,7 @@ if (config.slackUrl === '') {
 // Choose a theme
 themeManager(themes).then(function (theme) {
   // Now that we have a theme, send it to slack
-  var slackData = {'text': 'Today\'s challenge theme is *' + theme + '*\n<!here|here>'}
+  var slackData = {'text': 'Today\'s challenge theme is *' + theme + '*\n<!here|here> https://www.pinterest.com/search/pins/?q=' + theme}
   request({
     url: config.slackUrl,
     method: 'POST',
