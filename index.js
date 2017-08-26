@@ -1,5 +1,6 @@
 const config = require('./config')
 const themes = require('./src/themes')
+const adjectives = require('./src/adjectives')
 const themeManager = require('./src/themeManager')(config.themeTimeout)
 const historyManager = require('./src/historyManager')(config.historyFile, config.historyMax)
 const slackManager = require('./src/slackManager')(config.slackUrl)
@@ -10,7 +11,7 @@ if (config.slackUrl === '') {
 }
 historyManager.LoadHistory().then(function (history) {
   // Choose a theme
-  themeManager.chooseTheme(themes, history).then(
+  themeManager.chooseTheme(adjectives, themes, history).then(
     // Post the theme to slack
     slackManager.SlackPost
   ).then(function (theme) {
