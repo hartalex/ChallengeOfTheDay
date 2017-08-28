@@ -21,7 +21,8 @@ historyManager.LoadHistory().then(function (history) {
     .then(function (theme) {
     // Update and save history
       historyManager.AddHistory(theme, history).then(historyManager.SaveHistory(history))
-    })
+    }).catch(function (error) { throw error })
+
 }).catch(function (error) {
   // handle errors
   console.error(error)

@@ -31,6 +31,6 @@
   },
   "dependencies": {
     "request": "^2.81.0",
-    "twitter": "^1.7.1"
+    "twit": "^2.2.9"
   }
 }
