@@ -1,1 +1,2 @@
 require('./themeManagerTest')
+require('./slackManagerTest')

@@ -4,7 +4,7 @@ module.exports = function (slackUrl) {
     SlackPost: function (theme) {
       return new Promise(
         function (resolve, reject) {
-          var slackData = {'text': 'Today\'s challenge theme is *' + theme + '*\nNeed Inspiration? https://www.pinterest.com/search/pins/?q=' + theme}
+          var slackData = {'text': 'Today\'s challenge theme is *' + theme + '*\nNeed Inspiration? https://www.pinterest.com/search/pins/?q=' + encodeURIComponent(theme)}
           request({
             url: slackUrl,
             method: 'POST',
