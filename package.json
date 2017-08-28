@@ -30,6 +30,7 @@
     "nyc": "^11.0.3"
   },
   "dependencies": {
-    "request": "^2.81.0"
+    "request": "^2.81.0",
+    "twitter": "^1.7.1"
   }
 }
