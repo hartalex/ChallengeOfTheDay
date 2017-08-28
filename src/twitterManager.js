@@ -13,7 +13,7 @@ module.exports = function (consumerKey, consumerSecret, accessToken, accessToken
           })
           client.post('statuses/update', {status: 'Today\'s theme is ' + theme + '\n#artdailies'}, function (error, tweet, response) {
             if (error) {
-              reject(new Error('Error: ' + error + ' response: ' + response + ' tweet: ' + tweet))
+              reject(new Error('Error: ' + JSON.stringify(error) + ' response: ' + JSON.stringify(response) + ' tweet: ' + JSON.stringify(tweet)))
             } else {
               resolve(theme)
             }
