@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ $TRAVIS_BRANCH == 'prod' ]]; then
+if [ $TRAVIS_BRANCH == 'prod' ] || [ $TRAVIS_BRANCH == $TRAVIS_TAG ]; then
   if [ ! -d ${HOME}/google-cloud-sdk ]; then
     rm -rf $HOME/google-cloud-sdk;
     export CLOUDSDK_CORE_DISABLE_PROMPTS=1;
