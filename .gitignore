@@ -62,3 +62,12 @@ config.js
 
 #history file
 history.json
+
+#npm fix
+package-lock.json
+
+#coverage
+lcov.info
+
+#build folder
+build/

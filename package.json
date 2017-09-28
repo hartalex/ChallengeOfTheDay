@@ -6,6 +6,8 @@
   "scripts": {
     "test": "nyc mocha",
     "coverage": "nyc report --reporter=text-lcov > lcov.info",
+    "clean": "rimraf build",
+    "build": "npm run clean && babel src -d build/src && babel index.js -d build/",
     "lint": "eslint index.js test/** src/**",
     "start": "node index.js"
   },
@@ -20,17 +22,22 @@
   },
   "homepage": "https://github.com/hartalex/ChallengeOfTheDay#readme",
   "devDependencies": {
-    "eslint": "^4.3.0",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-node": "^5.1.1",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "mocha": "^3.4.2",
-    "nyc": "^11.0.3"
+    "eslint": "^4.7.2",
+    "eslint-config-standard": "10.2.1",
+    "eslint-plugin-import": "2.7.0",
+    "eslint-plugin-node": "^5.2.0",
+    "eslint-plugin-promise": "3.5.0",
+    "eslint-plugin-standard": "3.0.1",
+    "mocha": "^3.5.3",
+    "nyc": "^11.2.1",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-minify": "^0.2.0",
+    "rimraf": "^2.6.2"
   },
   "dependencies": {
-    "request": "^2.81.0",
-    "twit": "^2.2.9"
+    "request": "2.83.0",
+    "twit": "2.2.9"
   }
 }
