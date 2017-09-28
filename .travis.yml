@@ -1,8 +1,11 @@
+sudo: required
 cache:
   directories:
     - "$HOME/google-cloud-sdk/"
     - node_modules
 language: node_js
+services: 
+  - docker
 node_js:
   - "node"
 script:
