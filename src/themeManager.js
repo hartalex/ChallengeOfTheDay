@@ -1,47 +1,50 @@
 module.exports = function (timeoutMax) {
   return {
     chooseTheme: function (adjectives, themes, history) {
-      return new Promise(
-        function (resolve, reject) {
-          if (!Array.isArray(adjectives)) {
-            reject(new Error('adjectives parameter is not an array'))
+      return new Promise(function (resolve, reject) {
+        if (!Array.isArray(adjectives)) {
+          reject(new Error('adjectives parameter is not an array'))
+        } else {
+          if (adjectives.length === 0) {
+            reject(new Error('adjectives parameter array is empty'))
           } else {
-            if (adjectives.length === 0) {
-              reject(new Error('adjectives parameter array is empty'))
+            if (!Array.isArray(themes)) {
+              reject(new Error('themes parameter is not an array'))
             } else {
-              if (!Array.isArray(themes)) {
-                reject(new Error('themes parameter is not an array'))
+              if (themes.length === 0) {
+                reject(new Error('themes parameter array is empty'))
               } else {
-                if (themes.length === 0) {
-                  reject(new Error('themes parameter array is empty'))
+                // ensure history is defined
+                if (!history) {
+                  history = []
+                }
+                if (history.length >= themes.length) {
+                  reject(
+                    new Error(
+                      'History parameter array is greater than or equal to themes parameter array.\n No New Themes Will Be Found'
+                    )
+                  )
                 } else {
-                  // ensure history is defined
-                  if (!history) {
-                    history = []
+                  var timeoutIndex = 0
+                  var chosenTheme = getRandomTheme(adjectives, themes)
+
+                  // loop has a timeout just incase of a bug
+                  while (history.indexOf(chosenTheme) !== -1 && timeoutIndex++ < timeoutMax) {
+                    chosenTheme = getRandomTheme(adjectives, themes)
                   }
-                  if (history.length >= themes.length) {
-                    reject(new Error('History parameter array is greater than or equal to themes parameter array.\n No New Themes Will Be Found'))
+
+                  if (timeoutIndex >= timeoutMax) {
+                    // Should never happen
+                    reject(new Error('Theme Chooser Timed out'))
                   } else {
-                    var timeoutIndex = 0
-                    var chosenTheme = getRandomTheme(adjectives, themes)
-
-                    // loop has a timeout just incase of a bug
-                    while (history.indexOf(chosenTheme) !== -1 && timeoutIndex++ < timeoutMax) {
-                      chosenTheme = getRandomTheme(adjectives, themes)
-                    }
-
-                    if (timeoutIndex >= timeoutMax) {
-                      // Should never happen
-                      reject(new Error('Theme Chooser Timed out'))
-                    } else {
-                      resolve(chosenTheme)
-                    }
+                    resolve(chosenTheme)
                   }
                 }
               }
             }
           }
-        })
+        }
+      })
     }
   }
 }

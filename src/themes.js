@@ -1,4 +1,5 @@
-module.exports = ['Ability',
+module.exports = [
+  'Ability',
   'Accident',
   'Account',
   'Act',
@@ -670,4 +671,5 @@ module.exports = ['Ability',
   'Wood',
   'World',
   'Writer',
-  'Yard']
+  'Yard'
+]
