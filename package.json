@@ -9,7 +9,8 @@
     "clean": "rimraf build",
     "build": "npm run clean && babel src -d build/src && babel index.js -d build/",
     "lint": "eslint index.js test/** src/**",
-    "start": "node index.js"
+    "start": "node index.js",
+    "cleanOldContainers": "node scripts/cleanOldContainers.js"
   },
   "repository": {
     "type": "git",
