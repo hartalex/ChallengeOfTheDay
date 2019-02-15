@@ -57,9 +57,6 @@ typings/
 # dotenv environment variables file
 .env
 
-#configuration file
-config.js
-
 #history file
 history.json
 
