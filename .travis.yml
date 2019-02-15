@@ -4,22 +4,32 @@ cache:
     - "$HOME/google-cloud-sdk/"
     - node_modules
 language: node_js
+stages:
+  - name: test
+  - name: buildContainer
+    if: type IN (push, pull_request)
+  - name: releaseContainer
+    if: branch IN (test, prod, master) and type = push
 services: 
   - docker
 node_js:
-  - "node"
-script:
-    - npm run lint
-    - npm run test
-    - npm run coverage
-    - npm run build
+  - "11.9.0"
+before_install:
+  - ./scripts/setup.sh
+jobs:
+  include:
+    - stage: test
+      script:
+        - ./scripts/test.sh
+    - stage: buildContainer
+      script:
+        - ./scripts/buildContainer.sh
+    - stage: releaseContainer
+      script:
+        - ./scripts/releaseContainer.sh
+        - npm run cleanOldContainers
 notifications:
     slack: hartcode:GqPCaLxnPqXfPJBMjJbEvG81
 addons:
   code_climate:
     repo_token: ed12a3d8fc8d0024c18acfefa66d55ae1c11298d8f5ccfc3a10006d9a37c02df
-after_success:
-  - npm install -g codeclimate-test-reporter
-  - codeclimate-test-reporter < lcov.info
-  - openssl aes-256-cbc -K $encrypted_0d5a066bcda1_key -iv $encrypted_0d5a066bcda1_iv -in client-secret.json.enc -out client-secret.json -d;
-  - ./deployToGCS.sh challenge_of_the_day
