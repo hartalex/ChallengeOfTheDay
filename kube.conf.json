@@ -28,7 +28,7 @@
             "image": "gcr.io/hartonline-cloud/challenge-of-the-day:(TRAVIS_COMMIT)",
             "resources": {
               "limits": {
-                "cpu": ".05",
+                "cpu": ".1",
                 "memory": "20Mi"
               }
             },
