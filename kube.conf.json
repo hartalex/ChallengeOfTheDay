@@ -29,7 +29,7 @@
             "resources": {
               "limits": {
                 "cpu": ".05",
-                "memory": "50Mi"
+                "memory": "20Mi"
               }
             },
             "env": [
