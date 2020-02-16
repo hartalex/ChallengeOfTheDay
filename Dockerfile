@@ -1,4 +1,4 @@
-FROM node:11.9.0-alpine
+FROM node:12.6.0-alpine
 ENV NODE_ENV production
 RUN mkdir -p /root/challengeoftheday
 COPY ./build /root/challengeoftheday/
