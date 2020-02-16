@@ -1,6 +1,6 @@
 {
   "apiVersion": "batch/v1beta1",
-  "kind": "Deployment",
+  "kind": "CronJob",
   "metadata": {
     "name": "challenge-of-the-day",
     "labels": {
@@ -9,11 +9,6 @@
     }
   },
   "spec": {
-    "selector": {
-      "matchLabels": {
-        "app": "challenge-of-the-day"
-      }
-    },
     "schedule": "0 11 * * *",
     "jobTemplate": {
       "metadata": {
@@ -82,7 +77,8 @@
                   }
                 ]
               }
-            ]
+            ],
+            "restartPolicy": "Never"
           }
         }
       }
