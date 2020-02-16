@@ -1,5 +1,5 @@
 {
-  "apiVersion": "apps/v1",
+  "apiVersion": "batch/v1beta1",
   "kind": "Deployment",
   "metadata": {
     "name": "challenge-of-the-day",
@@ -9,78 +9,82 @@
     }
   },
   "spec": {
-    "replicas": 1,
     "selector": {
       "matchLabels": {
         "app": "challenge-of-the-day"
       }
     },
-    "template": {
+    "schedule": "0 11 * * *",
+    "jobTemplate": {
       "metadata": {
         "labels": {
           "app": "challenge-of-the-day"
         }
       },
       "spec": {
-        "containers": [
-          {
-            "name": "application",
-            "image": "gcr.io/hartonline-cloud/challenge-of-the-day:(TRAVIS_COMMIT)",
-            "resources": {
-              "limits": {
-                "cpu": ".05",
-                "memory": "100Mi"
-              }
-            },
-            "env": [
+        "template": {
+          "spec": {
+            "containers": [
               {
-                "name": "twitterConsumerKey",
-                "valueFrom": {
-                  "secretKeyRef": {
-                    "name": "challenge-of-the-day-secret",
-                    "key": "twitterConsumerKey"
+                "name": "application",
+                "image": "gcr.io/hartonline-cloud/challenge-of-the-day:(TRAVIS_COMMIT)",
+                "resources": {
+                  "limits": {
+                    "cpu": ".05",
+                    "memory": "100Mi"
                   }
-                }
-              },
-              {
-                "name": "twitterConsumerSecret",
-                "valueFrom": {
-                  "secretKeyRef": {
-                    "name": "challenge-of-the-day-secret",
-                    "key": "twitterConsumerSecret"
+                },
+                "env": [
+                  {
+                    "name": "twitterConsumerKey",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "name": "challenge-of-the-day-secret",
+                        "key": "twitterConsumerKey"
+                      }
+                    }
+                  },
+                  {
+                    "name": "twitterConsumerSecret",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "name": "challenge-of-the-day-secret",
+                        "key": "twitterConsumerSecret"
+                      }
+                    }
+                  },
+                  {
+                    "name": "twitterAccessToken",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "name": "challenge-of-the-day-secret",
+                        "key": "twitterAccessToken"
+                      }
+                    }
+                  },
+                  {
+                    "name": "twitterAccessTokenSecret",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "name": "challenge-of-the-day-secret",
+                        "key": "twitterAccessTokenSecret"
+                      }
+                    }
+                  },
+                  {
+                    "name": "slackUrl",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "name": "challenge-of-the-day-secret",
+                        "key": "slackUrl"
+                      }
+                    }
                   }
-                }
-              },
-              {
-                "name": "twitterAccessToken",
-                "valueFrom": {
-                  "secretKeyRef": {
-                    "name": "challenge-of-the-day-secret",
-                    "key": "twitterAccessToken"
-                  }
-                }
-              },
-              {
-                "name": "twitterAccessTokenSecret",
-                "valueFrom": {
-                  "secretKeyRef": {
-                    "name": "challenge-of-the-day-secret",
-                    "key": "twitterAccessTokenSecret"
-                  }
-                }
-              },
-              {
-                "name": "slackUrl",
-                "valueFrom": {
-                  "secretKeyRef": {
-                    "name": "challenge-of-the-day-secret",
-                    "key": "slackUrl"
-                  }
-                }
+                ]
               }
             ]
           }
-        ]
+        }
       }
     }
   }
