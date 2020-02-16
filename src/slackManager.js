@@ -18,12 +18,25 @@ module.exports = function (slackUrl) {
             body: slackData
           },
           function (error, response, body) {
-            if (!error && response.statusCode === 200) {
+            if (!error && response && response.statusCode === 200) {
               // Sending to Slack was successful
               resolve(theme)
             } else {
               // Sending to Slack failed
-              reject(new Error('Error: ' + error + ' statusCode: ' + response.statusCode + ' body: ' + body))
+              if (response) {
+                reject(
+                  new Error(
+                    'Error: ' +
+                      error +
+                      ' statusCode: ' +
+                      response.statusCode +
+                      ' body: ' +
+                      body
+                  )
+                )
+              } else {
+                reject(new Error('Error: ' + error + ' body: ' + body))
+              }
             }
           }
         )

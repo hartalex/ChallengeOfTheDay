@@ -5,4 +5,5 @@ COPY ./build /root/challengeoftheday/
 COPY ./package.json /root/challengeoftheday/package.json
 COPY ./config.js /root/challengeoftheday/config.js
 WORKDIR /root/challengeoftheday
+RUN npm install
 ENTRYPOINT ["node", "/root/challengeoftheday/index.js"]
