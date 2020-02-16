@@ -1,9 +1,10 @@
 {
-  "presets": ["minify", 
-    ["env", {
+  "presets": [ 
+    ["@babel/env", {
       "targets": {
         "node": "current"
       }
     }]
-  ]
+  ],
+  "compact": true
 }

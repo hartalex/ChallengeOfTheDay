@@ -29,7 +29,7 @@ describe('Test Suite', function () {
 
     it('Fail - Empty Array', function () {
       return themeManager
-        .chooseTheme([ 'adj' ], [])
+        .chooseTheme(['adj'], [])
         .then(function (theme) {
           assert.fail('should not have returned a theme')
         })
@@ -40,7 +40,7 @@ describe('Test Suite', function () {
 
     it('Fail - Themes Not an Array', function () {
       return themeManager
-        .chooseTheme([ 'adj' ], '')
+        .chooseTheme(['adj'], '')
         .then(function (theme) {
           assert.fail('should not have returned a theme')
         })
@@ -51,7 +51,7 @@ describe('Test Suite', function () {
 
     it('Fail - History Too Full', function () {
       return themeManager
-        .chooseTheme([ 'adj' ], [ 'test' ], [ 'test' ])
+        .chooseTheme(['adj'], ['test'], ['test'])
         .then(function (theme) {
           assert.fail('should not have returned a theme')
         })
