@@ -1,3 +1,4 @@
+/* eslint max-lines: "off" */
 module.exports = [
   'Ability',
   'Accident',

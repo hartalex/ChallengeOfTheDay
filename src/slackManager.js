@@ -1,9 +1,9 @@
 const request = require('request')
-module.exports = function (slackUrl) {
+module.exports = function(slackUrl) {
   return {
-    SlackPost: function (theme) {
-      return new Promise(function (resolve, reject) {
-        var slackData = {
+    slackPost: function(theme) {
+      return new Promise(function(resolve, reject) {
+        const slackData = {
           text:
             "Today's challenge theme is *" +
             theme +
@@ -17,26 +17,24 @@ module.exports = function (slackUrl) {
             json: true,
             body: slackData
           },
-          function (error, response, body) {
+          function(error, response, body) {
             if (!error && response && response.statusCode === 200) {
               // Sending to Slack was successful
               resolve(theme)
-            } else {
+            } else if (response) {
               // Sending to Slack failed
-              if (response) {
-                reject(
-                  new Error(
-                    'Error: ' +
-                      error +
-                      ' statusCode: ' +
-                      response.statusCode +
-                      ' body: ' +
-                      body
-                  )
+              reject(
+                new Error(
+                  'Error: ' +
+                    error +
+                    ' statusCode: ' +
+                    response.statusCode +
+                    ' body: ' +
+                    body
                 )
-              } else {
-                reject(new Error('Error: ' + error + ' body: ' + body))
-              }
+              )
+            } else {
+              reject(new Error('Error: ' + error + ' body: ' + body))
             }
           }
         )

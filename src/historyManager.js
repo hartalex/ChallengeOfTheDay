@@ -1,34 +1,36 @@
 const fs = require('fs')
-module.exports = function (historyFile, historyMax) {
+module.exports = function(historyFile, historyMax) {
   return {
     data: [],
-    LoadHistory: function () {
-      return new Promise(function (resolve, reject) {
-        fs.readFile(historyFile, function (err, data) {
-          var retval = []
+    loadHistory: function() {
+      return new Promise(function(resolve) {
+        fs.readFile(historyFile, function(err, data) {
+          let retval = []
           if (!err) {
-            // assuming history.json file is an array
+            // Assuming history.json file is an array
             retval = JSON.parse(data)
           }
           resolve(retval)
         })
       })
     },
-    AddHistory: function (theme, history) {
-      return new Promise(function (resolve, reject) {
+    addHistory: function(theme, history) {
+      return new Promise(function(resolve) {
         // Add new Theme to History
-        history.unshift(theme) // add item to begining of array
+        // Add item to begining of array
+        history.unshift(theme)
         // Check history length
         if (history.length > historyMax) {
-          history.pop() // remove last item of array
+          // Remove last item of array
+          history.pop()
         }
         resolve(history)
       })
     },
-    SaveHistory: function (history) {
-      return new Promise(function (resolve, reject) {
+    saveHistory: function(history) {
+      return new Promise(function(resolve, reject) {
         // Save history
-        fs.writeFile(historyFile, JSON.stringify(history), function (err) {
+        fs.writeFile(historyFile, JSON.stringify(history), function(err) {
           if (err) {
             console.error(err)
             reject(err)
