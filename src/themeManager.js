@@ -1,6 +1,8 @@
 module.exports = function(timeoutMax) {
   return {
     chooseTheme: function(adjectives, themes, history = []) {
+      const randomTheme = this.getRandomTheme
+
       return new Promise(function(resolve, reject) {
         if (!Array.isArray(adjectives)) {
           reject(new Error('adjectives parameter is not an array'))
@@ -18,14 +20,14 @@ module.exports = function(timeoutMax) {
           )
         } else {
           let timeoutIndex = 0
-          let chosenTheme = getRandomTheme(adjectives, themes)
+          let chosenTheme = randomTheme(adjectives, themes)
 
           // Loop has a timeout just incase of a bug
           while (
             history.indexOf(chosenTheme) !== -1 &&
             timeoutIndex++ < timeoutMax
           ) {
-            chosenTheme = getRandomTheme(adjectives, themes)
+            chosenTheme = randomTheme(adjectives, themes)
           }
 
           if (timeoutIndex >= timeoutMax) {
@@ -36,24 +38,23 @@ module.exports = function(timeoutMax) {
           }
         }
       })
+    },
+    /**
+     * Creates a theme by combining a random adjective and a random theme.
+     *
+     * @param {Array} adjectives - An array of string adjectives.
+     * @param {Array} themes - An array of string themes.
+     * @returns {string} - The theme created by combining a random adjective and a random theme.
+     */
+    getRandomTheme: function(adjectives, themes) {
+      const adjrandomNumber = Math.random() * adjectives.length
+      const adjindex = Math.floor(adjrandomNumber)
+      const randomNumber = Math.random() * themes.length
+      const index = Math.floor(randomNumber)
+
+      return jsUcfirst(adjectives[adjindex]) + ' ' + jsUcfirst(themes[index])
     }
   }
-}
-
-/**
- * Creates a theme by combining a random adjective and a random theme.
- *
- * @param {Array} adjectives - An array of string adjectives.
- * @param {Array} themes - An array of string themes.
- * @returns {string} - The theme created by combining a random adjective and a random theme.
- */
-function getRandomTheme(adjectives, themes) {
-  const adjrandomNumber = Math.random() * adjectives.length
-  const adjindex = Math.floor(adjrandomNumber)
-  const randomNumber = Math.random() * themes.length
-  const index = Math.floor(randomNumber)
-
-  return jsUcfirst(adjectives[adjindex]) + ' ' + jsUcfirst(themes[index])
 }
 
 /**

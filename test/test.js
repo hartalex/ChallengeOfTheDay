@@ -1,2 +1,0 @@
-require('./themeManagerTest')
-require('./slackManagerTest')

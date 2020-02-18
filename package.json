@@ -40,6 +40,13 @@
     "twit": "2.2.11"
   },
   "jest": {
+    "collectCoverageFrom": [
+      "**/*.js",
+      "!**/node_modules/**",
+      "!**/*.test.js",
+      "!**/scripts/**",
+      "!**/coverage/**"
+    ],
     "coverageReporters": [
       "json",
       "lcov",

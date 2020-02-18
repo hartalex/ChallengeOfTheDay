@@ -1,7 +1,7 @@
 const assert = require('assert')
 const themes = require('../src/themes')
 const adjectives = require('../src/adjectives')
-const themeManager = require('../src/themeManager')(10)
+const themeManager = require('../src/themeManager')(2)
 
 describe('Test Suite', function() {
   describe('#ThemeManager()', function() {
@@ -68,6 +68,46 @@ describe('Test Suite', function() {
         assert.notEqual(theme, '')
         console.log(theme)
       })
+    })
+
+    it('Success where theme manager has to retry because of a history collision', function() {
+      const history = ['Testy McTestFace']
+      const originalGetRandomTheme = themeManager.getRandomTheme
+      try {
+        themeManager.getRandomTheme = jest
+          .fn()
+          .mockReturnValueOnce('Testy McTestFace')
+          .mockReturnValue('New McTestFace')
+
+        return themeManager
+          .chooseTheme(adjectives, themes, history)
+          .then(function(theme) {
+            expect(theme).toBe('New McTestFace')
+          })
+      } finally {
+        themeManager.getRandomTheme = originalGetRandomTheme
+      }
+    })
+
+    it('Failure where theme manager times out because of too many history collisions', function() {
+      const history = ['Testy McTestFace']
+      const originalGetRandomTheme = themeManager.getRandomTheme
+      try {
+        themeManager.getRandomTheme = jest
+          .fn()
+          .mockReturnValue('Testy McTestFace')
+
+        return themeManager
+          .chooseTheme(adjectives, themes, history)
+          .then(function() {
+            assert.fail('should not have returned a theme')
+          })
+          .catch(function(error) {
+            assert.equal(error.message, 'Theme Chooser Timed out')
+          })
+      } finally {
+        themeManager.getRandomTheme = originalGetRandomTheme
+      }
     })
   })
 })
