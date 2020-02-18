@@ -4,8 +4,8 @@
   "description": "Theme generator for the #challenges channel of the MadisonGameDev Slack Group",
   "main": "index.js",
   "scripts": {
-    "test": "nyc mocha",
-    "coverage": "nyc report --reporter=text-lcov > lcov.info",
+    "test": "jest",
+    "coverage": "jest --coverage",
     "clean": "rimraf build",
     "build": "npm run clean && babel src -d build/src && babel index.js -d build/",
     "lint": "eslint index.js test/** src/**",
@@ -33,12 +33,26 @@
     "eslint-plugin-node": "11.0.0",
     "eslint-plugin-promise": "4.2.1",
     "eslint-plugin-standard": "4.0.1",
-    "mocha": "7.0.1",
-    "nyc": "15.0.0",
+    "jest": "25.1.0",
     "rimraf": "3.0.2"
   },
   "dependencies": {
     "request": "2.88.2",
     "twit": "2.2.11"
+  },
+  "jest": {
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "lines": 95,
+        "statements": 95,
+        "branches": 95,
+        "functions": 100
+      }
+    }
   }
 }
