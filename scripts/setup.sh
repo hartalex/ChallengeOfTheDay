@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o nounset
+set -o errexit
+set -o pipefail
 openssl aes-256-cbc -K $encrypted_ae6d5b61fabe_key -iv $encrypted_ae6d5b61fabe_iv -in secrets.tar.enc -out secrets.tar -d
 tar xvf secrets.tar
 if [ ! -d ${HOME}/google-cloud-sdk ]; then
