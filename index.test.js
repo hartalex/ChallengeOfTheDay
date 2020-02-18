@@ -7,10 +7,5 @@ describe('Test Suite', () => {
     it('Success', async () => {
       require('./index.js')
     })
-
-    it('Failure slackUrl is missing', async () => {
-      config.slackUrl = ''
-      require('./index.js')
-    })
   })
 })

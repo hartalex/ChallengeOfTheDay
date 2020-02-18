@@ -8,7 +8,7 @@
     "coverage": "jest --coverage",
     "clean": "rimraf build",
     "build": "npm run clean && babel src -d build/src && babel index.js -d build/",
-    "lint": "eslint index.js test/** src/**",
+    "lint": "eslint index.js src/**",
     "start": "node index.js",
     "cleanOldContainers": "node scripts/cleanOldContainers.js"
   },
@@ -54,10 +54,10 @@
     ],
     "coverageThreshold": {
       "global": {
-        "lines": 95,
-        "statements": 95,
-        "branches": 95,
-        "functions": 100
+        "lines": 85,
+        "statements": 85,
+        "branches": 85,
+        "functions": 85
       }
     }
   }

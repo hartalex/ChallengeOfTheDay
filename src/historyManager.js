@@ -32,7 +32,6 @@ module.exports = function(historyFile, historyMax) {
         // Save history
         fs.writeFile(historyFile, JSON.stringify(history), function(err) {
           if (err) {
-            console.error(err)
             reject(err)
           } else {
             resolve()

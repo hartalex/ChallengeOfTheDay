@@ -41,9 +41,8 @@ describe('Test Suite', () => {
       expect(response2).toStrictEqual(['Testy McTestFace2'])
     })
 
-    it('saveHistory Success', async () => {
-      return expect(history.saveHistory()).resolves.toBe()
-    })
+    it('saveHistory Success', async () =>
+      expect(history.saveHistory()).resolves.toBe())
 
     it('saveHistory Failure', async () => {
       fs.writeFile.mockImplementationOnce((_filename, _data, callback) => {
