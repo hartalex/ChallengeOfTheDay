@@ -47,7 +47,8 @@
       "!**/node_modules/**",
       "!**/*.test.js",
       "!**/scripts/**",
-      "!**/coverage/**"
+      "!**/coverage/**",
+      "!**/build/**"
     ],
     "coverageReporters": [
       "json",
