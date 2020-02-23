@@ -19,6 +19,7 @@ module.exports = function(slackUrl) {
           },
           function(error, response, body) {
             if (!error && response && response.statusCode === 200) {
+              console.log('SlackPost Done')
               // Sending to Slack was successful
               resolve(theme)
             } else if (response) {

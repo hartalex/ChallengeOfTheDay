@@ -22,6 +22,7 @@ module.exports = function(
           { status: "Today's theme is " + theme + '\n#artdailies' },
           function(error, tweet, response) {
             if (error) {
+              console.error(error)
               reject(
                 new Error(
                   'Error: ' +
@@ -33,6 +34,7 @@ module.exports = function(
                 )
               )
             } else {
+              console.log('TwitterPost Done')
               resolve(theme)
             }
           }

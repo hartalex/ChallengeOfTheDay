@@ -16,6 +16,7 @@ module.exports = function(historyFile, historyMax) {
     },
     addHistory: function(theme, history) {
       return new Promise(function(resolve) {
+        console.log('Adding to history')
         // Add new Theme to History
         // Add item to begining of array
         history.unshift(theme)

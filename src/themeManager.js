@@ -34,6 +34,7 @@ module.exports = function(timeoutMax) {
             // Should never happen
             reject(new Error('Theme Chooser Timed out'))
           } else {
+            console.log('Theme Chooser Done')
             resolve(chosenTheme)
           }
         }
