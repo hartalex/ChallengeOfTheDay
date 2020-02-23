@@ -1,3 +1,4 @@
+import logger from 'winston'
 const Twitter = require('twit')
 
 module.exports = function(
@@ -9,6 +10,7 @@ module.exports = function(
   return {
     twitterPost: function(theme) {
       return new Promise(function(resolve, reject) {
+        logger.debug('Twitter Post')
         const twitterData = {
           consumer_key: consumerKey,
           consumer_secret: consumerSecret,
@@ -22,7 +24,7 @@ module.exports = function(
           { status: "Today's theme is " + theme + '\n#artdailies' },
           function(error, tweet, response) {
             if (error) {
-              console.error(error)
+              logger.error(error)
               reject(
                 new Error(
                   'Error: ' +
@@ -34,7 +36,7 @@ module.exports = function(
                 )
               )
             } else {
-              console.log('TwitterPost Done')
+              logger.debug('TwitterPost Done')
               resolve(theme)
             }
           }

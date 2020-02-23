@@ -1,8 +1,14 @@
+import logger from 'winston'
 const request = require('request')
 module.exports = function(slackUrl) {
+  if (typeof slackUrl === 'undefined' || slackUrl === '') {
+    throw new Error('Slack URL is not defined in config.js')
+  }
+
   return {
     slackPost: function(theme) {
       return new Promise(function(resolve, reject) {
+        logger.debug('Slack Post')
         const slackData = {
           text:
             "Today's challenge theme is *" +
@@ -19,7 +25,7 @@ module.exports = function(slackUrl) {
           },
           function(error, response, body) {
             if (!error && response && response.statusCode === 200) {
-              console.log('SlackPost Done')
+              logger.debug('SlackPost Done')
               // Sending to Slack was successful
               resolve(theme)
             } else if (response) {

@@ -66,7 +66,6 @@ describe('Test Suite', function() {
     it('Success', function() {
       return themeManager.chooseTheme(adjectives, themes).then(function(theme) {
         assert.notEqual(theme, '')
-        console.log(theme)
       })
     })
 

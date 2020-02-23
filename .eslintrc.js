@@ -110,6 +110,7 @@ module.exports = {
     'no-await-in-loop': 'error',
     'no-bitwise': 'error',
     'no-buffer-constructor': 'error',
+    'no-console': 'error',
     'no-caller': 'error',
     'no-catch-shadow': 'error',
     'no-confusing-arrow': 'error',

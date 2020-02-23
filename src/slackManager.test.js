@@ -1,9 +1,9 @@
 jest.mock('request')
 import request from 'request'
 import slackManager from './slackManager.js'
-const slack = slackManager('a fake url')
 describe('Test Suite', () => {
-  describe('#SlackManager()', () => {
+  describe('#SlackManager(url)', () => {
+    const slack = slackManager('a fake url')
     it('slackPost Success', async () => {
       const theme = 'Testy McTestFace'
       const response = await slack.slackPost(theme)
@@ -28,6 +28,18 @@ describe('Test Suite', () => {
       return expect(slack.slackPost(theme)).rejects.toThrowError(
         'Error: Error: Mock Error body: mock body'
       )
+    })
+  })
+  describe('#SlackManager("invalid")', () => {
+    it('Creation failure due to a missing slack url', async () => {
+      expect(() => {
+        slackManager()
+      }).toThrowError('Slack URL is not defined in config.js')
+    })
+    it('Creation failure due to an empty slack url', async () => {
+      expect(() => {
+        slackManager('')
+      }).toThrowError('Slack URL is not defined in config.js')
     })
   })
 })

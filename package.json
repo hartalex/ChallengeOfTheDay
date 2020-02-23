@@ -36,8 +36,10 @@
     "rimraf": "3.0.2"
   },
   "dependencies": {
+    "babel-jest": "^25.1.0",
     "request": "2.88.2",
-    "twit": "2.2.11"
+    "twit": "2.2.11",
+    "winston": "^3.2.1"
   },
   "jest": {
     "collectCoverageFrom": [

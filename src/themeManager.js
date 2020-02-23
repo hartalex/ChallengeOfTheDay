@@ -1,6 +1,8 @@
+import logger from 'winston'
 module.exports = function(timeoutMax) {
   return {
     chooseTheme: function(adjectives, themes, history = []) {
+      logger.debug('Choosing theme')
       const randomTheme = this.getRandomTheme
 
       return new Promise(function(resolve, reject) {
@@ -34,7 +36,7 @@ module.exports = function(timeoutMax) {
             // Should never happen
             reject(new Error('Theme Chooser Timed out'))
           } else {
-            console.log('Theme Chooser Done')
+            logger.debug('Theme Chooser Done')
             resolve(chosenTheme)
           }
         }
