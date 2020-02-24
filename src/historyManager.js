@@ -1,6 +1,14 @@
 import logger from 'winston'
-const fs = require('fs')
-module.exports = function(historyFile, historyMax) {
+import fs from 'fs'
+
+/**
+ * Builds a history manager object.
+ *
+ * @param {string} historyFile - A file name to load and save history data to.
+ * @param {number} historyMax - The maximum number of history items to store in the history file.
+ * @returns {object} - The history manager object containing functions to loadHistory, addHistory, and saveHistory.
+ */
+export default function(historyFile, historyMax) {
   return {
     data: [],
     loadHistory: function() {
