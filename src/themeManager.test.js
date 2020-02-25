@@ -1,7 +1,9 @@
 const assert = require('assert')
 const themes = require('../src/themes')
 const adjectives = require('../src/adjectives')
-const themeManager = require('../src/themeManager')(2)
+import themeManagerDep from '../src/themeManager'
+
+const themeManager = themeManagerDep(2)
 
 describe('Test Suite', function() {
   describe('#ThemeManager()', function() {

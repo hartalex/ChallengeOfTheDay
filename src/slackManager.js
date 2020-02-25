@@ -1,11 +1,25 @@
 import logger from 'winston'
 const request = require('request')
+/**
+ * Builds a slack manager object.
+ *
+ * @class SlackManager
+ * @param {string} slackUrl - The slack api url to post messages to.
+ */
 module.exports = function(slackUrl) {
   if (typeof slackUrl === 'undefined' || slackUrl === '') {
     throw new Error('Slack URL is not defined in config.js')
   }
 
   return {
+    /**
+     * Posts a slack message to the given slackUrl.
+     *
+     * @memberof SlackManager
+     * @instance
+     * @param {string} theme - The theme to send to slack in message.
+     * @returns {string} - The given theme string.
+     */
     slackPost: function(theme) {
       return new Promise(function(resolve, reject) {
         logger.debug('Slack Post')

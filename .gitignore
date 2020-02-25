@@ -68,3 +68,6 @@ lcov.info
 
 #build folder
 build/
+
+#jsdoc folder
+out/

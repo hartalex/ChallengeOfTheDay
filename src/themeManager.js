@@ -1,9 +1,25 @@
 import logger from 'winston'
-module.exports = function(timeoutMax) {
+/**
+ * Builds a theme manager object.
+ *
+ * @class ThemeManager
+ * @param {number} timeoutMax - The max amount of times to try to generate a unique theme.
+ */
+export default function(timeoutMax) {
   return {
+    /**
+     * Creates a theme string using the list of adjectives and themes, and the provided history.
+     *
+     * @memberof ThemeManager
+     * @instance
+     * @param {Array.<string>} adjectives - A list of adjectives.
+     * @param {Array.<string>} themes - A list of themes.
+     * @param {Array.<string>} history - A list of themes created previously. Used to weed out duplicates.
+     * @returns {string} - The generated theme string.
+     */
     chooseTheme: function(adjectives, themes, history = []) {
       logger.debug('Choosing theme')
-      const randomTheme = this.getRandomTheme
+      const randomTheme = this.getRandomTheme.bind(this)
 
       return new Promise(function(resolve, reject) {
         if (!Array.isArray(adjectives)) {
@@ -45,6 +61,9 @@ module.exports = function(timeoutMax) {
     /**
      * Creates a theme by combining a random adjective and a random theme.
      *
+     * @memberof ThemeManager
+     * @instance
+     * @access private
      * @param {Array} adjectives - An array of string adjectives.
      * @param {Array} themes - An array of string themes.
      * @returns {string} - The theme created by combining a random adjective and a random theme.
@@ -54,18 +73,22 @@ module.exports = function(timeoutMax) {
       const adjindex = Math.floor(adjrandomNumber)
       const randomNumber = Math.random() * themes.length
       const index = Math.floor(randomNumber)
+      const ucAdjective = this.jsUcfirst(adjectives[adjindex])
+      const ucTheme = this.jsUcfirst(themes[index])
 
-      return jsUcfirst(adjectives[adjindex]) + ' ' + jsUcfirst(themes[index])
+      return `${ucAdjective} ${ucTheme}`
+    },
+    /**
+     * Transforms the passed in string and makes the first character uppercase.
+     *
+     * @memberof ThemeManager
+     * @instance
+     * @access private
+     * @param {string} string - The string to transform.
+     * @returns {string} - The passed in string with the first character changed to uppercase.
+     */
+    jsUcfirst: function(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1)
     }
   }
-}
-
-/**
- * Transforms the passed in string and makes the first character uppercase.
- *
- * @param {string} string - The string to transform.
- * @returns {string} - The passed in string with the first character changed to uppercase.
- */
-function jsUcfirst(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1)
 }

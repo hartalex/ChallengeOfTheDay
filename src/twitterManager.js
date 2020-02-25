@@ -1,6 +1,15 @@
 import logger from 'winston'
 const Twitter = require('twit')
 
+/**
+ * Builds a twitter manager object.
+ *
+ * @class TwitterManager
+ * @param {string} consumerKey - The twitter api consumer key.
+ * @param {string} consumerSecret - The twitter api consumer secret.
+ * @param {string} accessToken - The twitter api access token.
+ * @param {string} accessTokenSecret - The twitter api access token secret.
+ */
 module.exports = function(
   consumerKey,
   consumerSecret,
@@ -8,6 +17,14 @@ module.exports = function(
   accessTokenSecret
 ) {
   return {
+    /**
+     * Posts a twitter message to the accout with the given credentials.
+     *
+     * @memberof TwitterManager
+     * @instance
+     * @param {string} theme - The theme to send to twitter in message.
+     * @returns {string} - The given theme string.
+     */
     twitterPost: function(theme) {
       return new Promise(function(resolve, reject) {
         logger.debug('Twitter Post')
