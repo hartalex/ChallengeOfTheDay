@@ -17,7 +17,7 @@ describe('Test Suite', () => {
       })
 
       return expect(twitter.twitterPost(theme)).rejects.toThrowError(
-        'Error: {} response: "Mock Response" tweet: "Mock Tweet"'
+        'Error: {"level":"\\u001b[31merror\\u001b[39m"} response: "Mock Response" tweet: "Mock Tweet"'
       )
     })
   })

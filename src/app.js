@@ -8,9 +8,17 @@ import slackManagerDep from './slackManager'
 import twitterManagerDep from './twitterManager'
 
 // Configure Logging
+const myFormat = logger.format.printf(
+  ({ level, message, timestamp }) => `${timestamp} ${level}: ${message}`
+)
 logger.configure({
   level: 'debug',
-  format: logger.format.simple(),
+  format: logger.format.combine(
+    logger.format.colorize({ all: true }),
+    logger.format.errors({ stack: true }),
+    logger.format.timestamp(),
+    myFormat
+  ),
   transports: [new logger.transports.Console()]
 })
 
@@ -42,8 +50,8 @@ export default async function() {
     // Post to Twitter
     await twitterManager.twitterPost(theme)
     // Update and save history
-    await historyManager.addHistory(theme, history)
-    await historyManager.saveHistory(history)
+    await historyManager.addHistory(theme)
+    await historyManager.saveHistory()
     logger.debug('Done')
   } catch (error) {
     logger.error(error)
