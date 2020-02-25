@@ -16,7 +16,6 @@ export default function(historyFile, historyMax) {
     /**
      * Loads a string array of from the historyFile which is stored in the json format.
      *
-     * @function
      * @returns {Array.<string>} - The history loaded from the file.
      */
     loadHistory: function() {
@@ -53,7 +52,6 @@ export default function(historyFile, historyMax) {
     /**
      * Saves a string array to the historyFile in the json format.
      *
-     * @param {Array.<string>} history - The array of strings to save.
      * @returns {undefined}
      */
     saveHistory: function() {
