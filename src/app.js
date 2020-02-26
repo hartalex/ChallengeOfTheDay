@@ -4,7 +4,7 @@ import themes from './themes'
 import adjectives from './adjectives'
 import themeManagerDep from './themeManager'
 import historyManagerDep from './historyManager'
-import slackManagerDep from './slackManager'
+import { slackPost } from './slackManager'
 import twitterManagerDep from './twitterManager'
 
 // Configure Logging
@@ -29,7 +29,6 @@ logger.configure({
  */
 export default async function() {
   try {
-    const slackManager = slackManagerDep(config.slackUrl)
     const themeManager = themeManagerDep(config.themeTimeout)
     const historyManager = historyManagerDep(
       config.historyFile,
@@ -46,7 +45,7 @@ export default async function() {
     const theme = await themeManager.chooseTheme(adjectives, themes, history)
     logger.info(`Chosen theme is ${theme}`)
     // Post to Slack
-    await slackManager.slackPost(theme)
+    await slackPost(config.slackUrl, theme)
     // Post to Twitter
     await twitterManager.twitterPost(theme)
     // Update and save history
