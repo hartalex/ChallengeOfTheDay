@@ -4,8 +4,10 @@
   "description": "Theme generator for the #challenges channel of the MadisonGameDev Slack Group",
   "main": "index.js",
   "scripts": {
-    "test": "jest --silent",
-    "coverage": "jest --coverage --silent",
+    "test": "jest --watch --silent --group=unit",
+    "integration-test": "jest --watch --silent --group=integration",
+    "coverage": "jest --coverage --silent --group=unit",
+    "integration-coverage": "jest --coverage --silent --group=integration",
     "clean": "rimraf build",
     "build": "npm run clean && babel src -d build/src && babel index.js -d build/",
     "lint": "eslint index.js src/**",
@@ -29,10 +31,11 @@
     "codeclimate-test-reporter": "0.5.1",
     "eslint": "6.8.0",
     "eslint-plugin-import": "2.20.1",
-    "eslint-plugin-node": "11.0.0",
     "eslint-plugin-jest": "23.7.0",
     "eslint-plugin-jsdoc": "21.0.0",
+    "eslint-plugin-node": "11.0.0",
     "jest": "25.1.0",
+    "jest-runner-groups": "1.1.1",
     "rimraf": "3.0.2"
   },
   "dependencies": {
@@ -66,6 +69,7 @@
         "branches": 95,
         "functions": 100
       }
-    }
+    },
+    "runner": "groups"
   }
 }

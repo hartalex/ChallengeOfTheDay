@@ -2,6 +2,10 @@ jest.mock('twit')
 import twit from 'twit'
 import twitterManager from './twitterManager.js'
 const twitter = twitterManager('', '', '', '')
+
+/*
+ * @group unit
+ */
 describe('Test Suite', () => {
   describe('#TwitterManager()', () => {
     it('twitterPost Success', async () => {

@@ -1,6 +1,10 @@
 jest.mock('isomorphic-fetch')
 import fetch from 'isomorphic-fetch'
 import slackManager from './slackManager.js'
+
+/*
+ * @group unit
+ */
 describe('Test Suite', () => {
   describe('#SlackManager(url)', () => {
     const slack = slackManager('a fake url')
@@ -20,21 +24,11 @@ describe('Test Suite', () => {
     it('slackPost returns an bad statusCode', async () => {
       const theme = 'Testy McTestFace'
       fetch.mockImplementationOnce(() => ({
-        statusCode: 500,
-        body: 'Mock Error'
+        status: 500,
+        statusText: 'Mock Error'
       }))
 
-      return expect(slack.slackPost(theme)).rejects.toThrowError(
-        'statusCode: 500 body: Mock Error'
-      )
-    })
-    it('slackPost returns an empty response object', async () => {
-      const theme = 'Testy McTestFace'
-      fetch.mockImplementationOnce(() => ({}))
-
-      return expect(slack.slackPost(theme)).rejects.toThrowError(
-        'Unknown Error'
-      )
+      return expect(slack.slackPost(theme)).rejects.toThrowError('Mock Error')
     })
   })
   describe('#SlackManager("invalid")', () => {

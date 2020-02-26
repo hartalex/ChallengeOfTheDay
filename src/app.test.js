@@ -7,6 +7,9 @@ import fetch from 'isomorphic-fetch'
 import fs from 'fs'
 import logger from 'winston'
 
+/*
+ * @group unit
+ */
 describe('Test Suite', () => {
   describe('#App()', () => {
     it('Success', async () => {

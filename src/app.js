@@ -12,7 +12,7 @@ const myFormat = logger.format.printf(
   ({ level, message, timestamp }) => `${timestamp} ${level}: ${message}`
 )
 logger.configure({
-  level: 'debug',
+  level: 'info',
   format: logger.format.combine(
     logger.format.colorize({ all: true }),
     logger.format.errors({ stack: true }),

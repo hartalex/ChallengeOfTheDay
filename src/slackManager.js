@@ -32,23 +32,26 @@ module.exports = function(slackUrl) {
       const response = await fetch(slackUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(slackData)
+        body: JSON.stringify(slackData),
+        timeout: 3000
       })
 
-      if (response && response.statusCode === 200) {
-        logger.debug('SlackPost Done')
-        // Sending to Slack was successful
+      logger.debug(`Response Code: ${JSON.stringify(response.status, null, 2)}`)
+      logger.debug(
+        `Response Status: ${JSON.stringify(response.statusText, null, 2)}`
+      )
+      logger.debug(`Response Body: ${response.body}`)
 
-        return theme
+      if (response.status < 200 || response.status >= 300) {
+        const error = new Error(response.statusText)
+        error.response = response
+        throw error
       }
 
-      if (response && response.statusCode && response.body) {
-        throw new Error(
-          `statusCode: ${response.statusCode} body: ${response.body}`
-        )
-      }
-      // Sending to Slack failed
-      throw new Error('Unknown Error')
+      // Sending to Slack was successful
+      logger.debug('SlackPost Done')
+
+      return theme
     }
   }
 }

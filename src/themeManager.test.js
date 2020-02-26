@@ -5,6 +5,9 @@ import themeManagerDep from '../src/themeManager'
 
 const themeManager = themeManagerDep(2)
 
+/*
+ * @group unit
+ */
 describe('Test Suite', function() {
   describe('#ThemeManager()', function() {
     it('Fail - Empty Array', function() {
