@@ -8,5 +8,6 @@ export twitterConsumerSecret="csec"
 export twitterAccessToken="at"
 export twitterAccessTokenSecret="atsec"
 npm run lint
+npm run inspect
 npm run coverage
 npx codeclimate-test-reporter < coverage/lcov.info

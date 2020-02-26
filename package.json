@@ -11,6 +11,7 @@
     "clean": "rimraf build",
     "build": "npm run clean && babel src -d build/src && babel index.js -d build/",
     "lint": "eslint index.js src/**",
+    "inspect": "jsinspect -I -L -t 20 --ignore \"test|mock|adjectives|themes\"",
     "start": "node index.js",
     "cleanOldContainers": "node scripts/cleanOldContainers.js"
   },
@@ -36,6 +37,7 @@
     "eslint-plugin-node": "11.0.0",
     "jest": "25.1.0",
     "jest-runner-groups": "1.1.1",
+    "jsinspect": "0.12.7",
     "rimraf": "3.0.2"
   },
   "dependencies": {
@@ -46,9 +48,7 @@
     "winston": "3.2.1"
   },
   "jest": {
-    "setupFiles": [
-      "./scripts/testSetup.js"
-    ],
+    "setupFiles": ["./scripts/testSetup.js"],
     "collectCoverageFrom": [
       "**/*.js",
       "!**/node_modules/**",
@@ -57,11 +57,7 @@
       "!**/coverage/**",
       "!**/build/**"
     ],
-    "coverageReporters": [
-      "json",
-      "lcov",
-      "text"
-    ],
+    "coverageReporters": ["json", "lcov", "text"],
     "coverageThreshold": {
       "global": {
         "lines": 95,
