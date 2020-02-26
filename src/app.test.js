@@ -1,9 +1,9 @@
 jest.mock('fs')
 jest.mock('twit')
-jest.mock('request')
+jest.mock('isomorphic-fetch')
 jest.mock('winston')
 import app from './app'
-import request from 'request'
+import fetch from 'isomorphic-fetch'
 import fs from 'fs'
 import logger from 'winston'
 
@@ -16,8 +16,8 @@ describe('Test Suite', () => {
     })
 
     it('Failure due to slackManager failing to post', async () => {
-      request.mockImplementationOnce((_object, callback) => {
-        callback('Mock Error', { statusCode: 200 }, 'mock body')
+      fetch.mockImplementationOnce(() => {
+        throw new Error('Mock Error')
       })
       await app()
     })

@@ -1,5 +1,5 @@
 import logger from 'winston'
-const request = require('request')
+import fetch from 'isomorphic-fetch'
 /**
  * Builds a slack manager object.
  *
@@ -20,46 +20,35 @@ module.exports = function(slackUrl) {
      * @param {string} theme - The theme to send to slack in message.
      * @returns {string} - The given theme string.
      */
-    slackPost: function(theme) {
-      return new Promise(function(resolve, reject) {
-        logger.debug('Slack Post')
-        const slackData = {
-          text:
-            "Today's challenge theme is *" +
-            theme +
-            '*\nNeed Inspiration? https://www.pinterest.com/search/pins/?q=' +
-            encodeURIComponent(theme)
-        }
-        request(
-          {
-            url: slackUrl,
-            method: 'POST',
-            json: true,
-            body: slackData
-          },
-          function(error, response, body) {
-            if (!error && response && response.statusCode === 200) {
-              logger.debug('SlackPost Done')
-              // Sending to Slack was successful
-              resolve(theme)
-            } else if (response) {
-              // Sending to Slack failed
-              reject(
-                new Error(
-                  'Error: ' +
-                    error +
-                    ' statusCode: ' +
-                    response.statusCode +
-                    ' body: ' +
-                    body
-                )
-              )
-            } else {
-              reject(new Error('Error: ' + error + ' body: ' + body))
-            }
-          }
-        )
+    slackPost: async function(theme) {
+      logger.debug('Slack Post')
+      const slackData = {
+        text:
+          "Today's challenge theme is *" +
+          theme +
+          '*\nNeed Inspiration? https://www.pinterest.com/search/pins/?q=' +
+          encodeURIComponent(theme)
+      }
+      const response = await fetch(slackUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(slackData)
       })
+
+      if (response && response.statusCode === 200) {
+        logger.debug('SlackPost Done')
+        // Sending to Slack was successful
+
+        return theme
+      }
+
+      if (response && response.statusCode && response.body) {
+        throw new Error(
+          `statusCode: ${response.statusCode} body: ${response.body}`
+        )
+      }
+      // Sending to Slack failed
+      throw new Error('Unknown Error')
     }
   }
 }

@@ -1,5 +1,5 @@
-jest.mock('request')
-import request from 'request'
+jest.mock('isomorphic-fetch')
+import fetch from 'isomorphic-fetch'
 import slackManager from './slackManager.js'
 describe('Test Suite', () => {
   describe('#SlackManager(url)', () => {
@@ -9,24 +9,31 @@ describe('Test Suite', () => {
       const response = await slack.slackPost(theme)
       expect(response).toBe(theme)
     })
-    it('slackPost Failure with a response', async () => {
+    it('slackPost Throws an Error', async () => {
       const theme = 'Testy McTestFace'
-      request.mockImplementationOnce((_object, callback) => {
-        callback(new Error('Mock Error'), { statusCode: 200 }, 'mock body')
+      fetch.mockImplementationOnce(() => {
+        throw new Error('Mock Error')
       })
 
+      return expect(slack.slackPost(theme)).rejects.toThrowError('Mock Error')
+    })
+    it('slackPost returns an bad statusCode', async () => {
+      const theme = 'Testy McTestFace'
+      fetch.mockImplementationOnce(() => ({
+        statusCode: 500,
+        body: 'Mock Error'
+      }))
+
       return expect(slack.slackPost(theme)).rejects.toThrowError(
-        'Error: Error: Mock Error statusCode: 200 body: mock body'
+        'statusCode: 500 body: Mock Error'
       )
     })
-    it('slackPost Failure without a response', async () => {
+    it('slackPost returns an empty response object', async () => {
       const theme = 'Testy McTestFace'
-      request.mockImplementationOnce((_object, callback) => {
-        callback(new Error('Mock Error'), null, 'mock body')
-      })
+      fetch.mockImplementationOnce(() => ({}))
 
       return expect(slack.slackPost(theme)).rejects.toThrowError(
-        'Error: Error: Mock Error body: mock body'
+        'Unknown Error'
       )
     })
   })
