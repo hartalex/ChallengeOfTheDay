@@ -11,9 +11,9 @@ import fetch from 'isomorphic-fetch'
 export async function slackPost(slackUrl, theme) {
   logger.debug('Slack Post')
   if (typeof slackUrl === 'undefined' || slackUrl === '' || slackUrl === null) {
-    logger.error(slackUrl)
     throw new Error('Slack URL is not defined in config.js')
   }
+
   const response = await fetch(slackUrl, {
     body: JSON.stringify(createSlackMessageData(theme)),
     headers: { 'Content-Type': 'application/json' },

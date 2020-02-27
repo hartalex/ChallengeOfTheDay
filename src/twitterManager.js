@@ -18,7 +18,7 @@ export async function twitterPost(theme, config) {
   const client = new Twitter(mapConfig2TwitConfig(config))
   const clientPost = promisify(client.post)
   await clientPost('statuses/update', {
-    status: "Today's theme is " + theme + '\n#artdailies'
+    status: `Today's theme is ${theme} \n#artdailies`
   })
 
   return theme
