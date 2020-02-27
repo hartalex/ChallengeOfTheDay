@@ -59,8 +59,8 @@ function getRandomTheme(adjectives, themes) {
  * @returns {undefined}
  */
 function validateParams(adjectives, themes, history) {
-  validateArray(adjectives)
-  validateArray(themes)
+  validateArray(adjectives, 'adjectives')
+  validateArray(themes, 'themes')
   if (history.length >= themes.length) {
     throw new Error(
       'History parameter array is greater than or equal to themes parameter array.\n No New Themes Will Be Found'
