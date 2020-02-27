@@ -1,5 +1,5 @@
 import logger from 'winston'
-import config from './config'
+import config from 'config'
 import themes from './themes'
 import adjectives from './adjectives'
 import { chooseTheme } from './themeManager'
@@ -16,19 +16,21 @@ import { configureLogger } from './logger.js'
 export default async function() {
   try {
     configureLogger()
-    const historyManager = new HistoryManager(
-      config.historyFile,
-      config.historyMax
-    )
+    const historyFile = config.get('config.historyFile')
+    const historyMax = config.get('historyMax')
+    const twitter = config.get('twitter')
+    const slackUrl = config.get('slackUrl')
+    const themeTimeout = config.get('themeTimeout')
+    const historyManager = new HistoryManager(historyFile, historyMax)
     const history = await historyManager.loadHistory()
     const theme = await chooseTheme(
       { adjectives, themes },
       history,
-      config.themeTimeout
+      themeTimeout
     )
     logger.info(`Chosen theme is ${theme}`)
-    await slackPost(config.slackUrl, theme)
-    await twitterPost(theme, config.twitter)
+    await slackPost(slackUrl, theme)
+    await twitterPost(theme, twitter)
     await historyManager.addHistory(theme)
     await historyManager.saveHistory()
     logger.debug('Done')

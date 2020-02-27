@@ -1,0 +1,14 @@
+{
+  "config": {
+    "historyFile": "history.json",
+    "historyMax": 90,
+    "slackUrl": "slackUrl",
+    "themeTimeout": 50,
+    "twitter": {
+      "accessToken": "twitterAccessToken",
+      "accessTokenSecret": "twitterAccessTokenSecret",
+      "consumerKey": "twitterConsumerKey",
+      "consumerSecret": "twitterConsumerSecret"
+    }
+  }
+}
