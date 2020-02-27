@@ -1,9 +1,7 @@
 const assert = require('assert')
 const themes = require('../src/themes')
 const adjectives = require('../src/adjectives')
-import themeManagerDep from '../src/themeManager'
-
-const themeManager = themeManagerDep(2)
+import { chooseTheme, __RewireAPI__ } from '../src/themeManager'
 
 /*
  * @group unit
@@ -11,8 +9,7 @@ const themeManager = themeManagerDep(2)
 describe('Test Suite', function() {
   describe('#ThemeManager()', function() {
     it('Fail - Empty Array', function() {
-      return themeManager
-        .chooseTheme([], [])
+      return chooseTheme({ adjectives: [], themes: [] }, null, 2)
         .then(function() {
           assert.fail('should not have returned a theme')
         })
@@ -22,8 +19,7 @@ describe('Test Suite', function() {
     })
 
     it('Fail - Adjectives Not an Array', function() {
-      return themeManager
-        .chooseTheme('', '')
+      return chooseTheme({ adjectives: '', themes: '' }, null, 2)
         .then(function() {
           assert.fail('should not have returned a theme')
         })
@@ -33,8 +29,7 @@ describe('Test Suite', function() {
     })
 
     it('Fail - Empty Array', function() {
-      return themeManager
-        .chooseTheme(['adj'], [])
+      return chooseTheme({ adjectives: ['adj'], themes: [] }, null, 2)
         .then(function() {
           assert.fail('should not have returned a theme')
         })
@@ -44,8 +39,7 @@ describe('Test Suite', function() {
     })
 
     it('Fail - Themes Not an Array', function() {
-      return themeManager
-        .chooseTheme(['adj'], '')
+      return chooseTheme({ adjectives: ['adj'], themes: '' }, null, 2)
         .then(function() {
           assert.fail('should not have returned a theme')
         })
@@ -55,8 +49,7 @@ describe('Test Suite', function() {
     })
 
     it('Fail - History Too Full', function() {
-      return themeManager
-        .chooseTheme(['adj'], ['test'], ['test'])
+      return chooseTheme({ adjectives: ['adj'], themes: ['test'] }, ['test'], 2)
         .then(function() {
           assert.fail('should not have returned a theme')
         })
@@ -69,40 +62,41 @@ describe('Test Suite', function() {
     })
 
     it('Success', function() {
-      return themeManager.chooseTheme(adjectives, themes).then(function(theme) {
+      return chooseTheme({ adjectives, themes }).then(function(theme) {
         assert.notEqual(theme, '')
       })
     })
 
     it('Success where theme manager has to retry because of a history collision', function() {
       const history = ['Testy McTestFace']
-      const originalGetRandomTheme = themeManager.getRandomTheme
       try {
-        themeManager.getRandomTheme = jest
-          .fn()
-          .mockReturnValueOnce('Testy McTestFace')
-          .mockReturnValue('New McTestFace')
+        __RewireAPI__.__Rewire__(
+          'getRandomTheme',
+          jest
+            .fn()
+            .mockReturnValueOnce('Testy McTestFace')
+            .mockReturnValue('New McTestFace')
+        )
 
-        return themeManager
-          .chooseTheme(adjectives, themes, history)
-          .then(function(theme) {
-            expect(theme).toBe('New McTestFace')
-          })
+        return chooseTheme({ adjectives, themes }, history).then(function(
+          theme
+        ) {
+          expect(theme).toBe('New McTestFace')
+        })
       } finally {
-        themeManager.getRandomTheme = originalGetRandomTheme
+        __RewireAPI__.__ResetDependency__('getRandomTheme')
       }
     })
 
     it('Failure where theme manager times out because of too many history collisions', function() {
       const history = ['Testy McTestFace']
-      const originalGetRandomTheme = themeManager.getRandomTheme
       try {
-        themeManager.getRandomTheme = jest
-          .fn()
-          .mockReturnValue('Testy McTestFace')
+        __RewireAPI__.__Rewire__(
+          'getRandomTheme',
+          jest.fn().mockReturnValue('Testy McTestFace')
+        )
 
-        return themeManager
-          .chooseTheme(adjectives, themes, history)
+        return chooseTheme({ adjectives, themes }, history)
           .then(function() {
             assert.fail('should not have returned a theme')
           })
@@ -110,7 +104,7 @@ describe('Test Suite', function() {
             assert.equal(error.message, 'Theme Chooser Timed out')
           })
       } finally {
-        themeManager.getRandomTheme = originalGetRandomTheme
+        __RewireAPI__.__ResetDependency__('getRandomTheme')
       }
     })
   })

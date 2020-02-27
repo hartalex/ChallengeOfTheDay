@@ -2,20 +2,20 @@ module.exports = {
   env: {
     es6: true,
     node: true,
-    'jest/globals': true,
+    'jest/globals': true
   },
   extends: ['eslint:recommended'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
-    fetch: 'writeable',
+    fetch: 'writeable'
   },
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
     ecmaFeatures: {
-      jsx: true,
-    },
+      jsx: true
+    }
   },
   plugins: ['jest', 'import', 'jsdoc', 'node'],
   rules: {
@@ -30,14 +30,14 @@ module.exports = {
       'error',
       {
         after: true,
-        before: true,
-      },
+        before: true
+      }
     ],
     'block-scoped-var': 'error',
     'block-spacing': 'error',
     'brace-style': ['error', '1tbs'],
     'callback-return': 'error',
-    camelcase: ['error', {properties: 'never', ignoreImports: true}],
+    camelcase: ['error', { properties: 'never', ignoreImports: true }],
     'capitalized-comments': ['error', 'always'],
     'class-methods-use-this': 'error',
     'comma-dangle': 'error',
@@ -45,8 +45,8 @@ module.exports = {
       'error',
       {
         after: true,
-        before: false,
-      },
+        before: false
+      }
     ],
     'comma-style': ['error', 'last'],
     complexity: 'error',
@@ -81,8 +81,8 @@ module.exports = {
       'error',
       {
         after: true,
-        before: true,
-      },
+        before: true
+      }
     ],
     'line-comment-position': 'error',
     'linebreak-style': ['error', 'unix'],
@@ -121,8 +121,8 @@ module.exports = {
     'no-empty': [
       'error',
       {
-        allowEmptyCatch: true,
-      },
+        allowEmptyCatch: true
+      }
     ],
     'no-empty-function': 'error',
     'no-eq-null': 'error',
@@ -194,8 +194,8 @@ module.exports = {
     'no-unneeded-ternary': [
       'error',
       {
-        defaultAssignment: true,
-      },
+        defaultAssignment: true
+      }
     ],
     'no-unused-expressions': 'error',
     'no-use-before-define': 'off',
@@ -290,6 +290,15 @@ module.exports = {
     'jsdoc/require-returns-check': 1, // Recommended
     'jsdoc/require-returns-description': 1, // Recommended
     'jsdoc/require-returns-type': 1, // Recommended
-    'jsdoc/valid-types': 1, // Recommended
+    'jsdoc/valid-types': 1 // Recommended
   },
-};
+  overrides: [
+    {
+      files: ['*.test.js', '*.spec.js'],
+      rules: {
+        'max-lines-per-function': 'off',
+        'no-underscore-dangle': 'off'
+      }
+    }
+  ]
+}

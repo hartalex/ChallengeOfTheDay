@@ -1,8 +1,8 @@
 jest.mock('twit')
+jest.mock('./config.js')
 import twit from 'twit'
-import twitterManager from './twitterManager.js'
-const twitter = twitterManager('', '', '', '')
-
+import { twitterPost } from './twitterManager.js'
+import config from './config.js'
 /*
  * @group unit
  */
@@ -10,7 +10,7 @@ describe('Test Suite', () => {
   describe('#TwitterManager()', () => {
     it('twitterPost Success', async () => {
       const theme = 'Testy McTestFace'
-      const response = await twitter.twitterPost(theme)
+      const response = await twitterPost(theme, config.twitter)
       expect(response).toBe(theme)
     })
     it('twitterPost Failure', async () => {
@@ -20,8 +20,8 @@ describe('Test Suite', () => {
         callback(new Error('Mock Error'), 'Mock Tweet', 'Mock Response')
       })
 
-      return expect(twitter.twitterPost(theme)).rejects.toThrowError(
-        'Error: {"level":"\\u001b[31merror\\u001b[39m"} response: "Mock Response" tweet: "Mock Tweet"'
+      return expect(twitterPost(theme, config.twitter)).rejects.toThrowError(
+        'Mock Error'
       )
     })
   })

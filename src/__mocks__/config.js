@@ -1,5 +1,5 @@
 module.exports = {
-  slackUrl: '',
+  slackUrl: 'a',
   twitter: {
     consumerKey: process.env.twitterConsumerKey,
     consumerSecret: process.env.twitterConsumerSecret,

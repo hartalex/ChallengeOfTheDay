@@ -5,6 +5,8 @@
         "node": "current"
       }
     }]
+
   ],
+  "plugins": ["rewire"],
   "compact": true
 }

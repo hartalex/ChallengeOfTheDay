@@ -2,6 +2,7 @@ jest.mock('fs')
 jest.mock('twit')
 jest.mock('isomorphic-fetch')
 jest.mock('winston')
+jest.mock('./config')
 import app from './app'
 import fetch from 'isomorphic-fetch'
 import fs from 'fs'

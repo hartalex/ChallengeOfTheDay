@@ -1,7 +1,7 @@
 jest.mock('fs')
 import fs from 'fs'
-import historyManager from './historyManager.js'
-const history = historyManager('filename', 1)
+import { HistoryManager } from './historyManager.js'
+const history = new HistoryManager('filename', 1)
 
 /*
  * @group unit
