@@ -21,11 +21,7 @@ export async function slackPost(slackUrl, theme) {
     timeout: 3000
   })
 
-  if (response.status < 200 || response.status >= 300) {
-    const error = new Error(response.statusText)
-    error.response = response
-    throw error
-  }
+  validateFetch(response)
 
   // Sending to Slack was successful
   logger.debug('SlackPost Done')
@@ -42,5 +38,19 @@ export async function slackPost(slackUrl, theme) {
 function createSlackMessageData(theme) {
   return {
     text: `Today's challenge theme is *${theme}*\nNeed Inspiration? https://www.pinterest.com/search/pins/?q=${encodeURIComponent()}`
+  }
+}
+
+/**
+ * Validates a fetch response.
+ *
+ * @param {object} response - Response object of a fetch call.
+ * @returns {undefined}
+ */
+function validateFetch(response) {
+  if (response.status < 200 || response.status >= 300) {
+    const error = new Error(response.statusText)
+    error.response = response
+    throw error
   }
 }

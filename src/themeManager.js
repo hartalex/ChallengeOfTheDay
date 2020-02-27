@@ -59,18 +59,27 @@ function getRandomTheme(adjectives, themes) {
  * @returns {undefined}
  */
 function validateParams(adjectives, themes, history) {
-  if (!Array.isArray(adjectives)) {
-    throw new Error('adjectives parameter is not an array')
-  } else if (adjectives.length === 0) {
-    throw new Error('adjectives parameter array is empty')
-  } else if (!Array.isArray(themes)) {
-    throw new Error('themes parameter is not an array')
-  } else if (themes.length === 0) {
-    throw new Error('themes parameter array is empty')
-  } else if (history.length >= themes.length) {
+  validateArray(adjectives)
+  validateArray(themes)
+  if (history.length >= themes.length) {
     throw new Error(
       'History parameter array is greater than or equal to themes parameter array.\n No New Themes Will Be Found'
     )
+  }
+}
+
+/**
+ * Validates an Array.
+ *
+ * @param {Array.<string>} array - The array to validate.
+ * @param {string} name - The name of the array used in error messages.
+ * @returns {undefined}
+ */
+function validateArray(array, name) {
+  if (!Array.isArray(array)) {
+    throw new Error(`${name} parameter is not an array`)
+  } else if (array.length === 0) {
+    throw new Error(`${name} parameter array is empty`)
   }
 }
 
