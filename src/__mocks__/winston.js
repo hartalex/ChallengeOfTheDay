@@ -2,24 +2,24 @@ const winston = jest.requireActual('winston')
 const override = true
 
 let object = {
-  info: jest.fn(),
   configure: jest.fn(),
-  error: jest.fn(),
-  warn: jest.fn(),
   debug: jest.fn(),
+  error: jest.fn(),
   format: winston.format,
-  transports: winston.transports
+  info: jest.fn(),
+  transports: winston.transports,
+  warn: jest.fn()
 }
 
 if (override) {
   object = {
-    info: jest.fn().mockImplementation(winston.info),
     configure: jest.fn().mockImplementation(winston.configure),
-    error: jest.fn().mockImplementation(winston.error),
-    warn: jest.fn().mockImplementation(winston.warn),
     debug: jest.fn().mockImplementation(winston.debug),
+    error: jest.fn().mockImplementation(winston.error),
     format: winston.format,
-    transports: winston.transports
+    info: jest.fn().mockImplementation(winston.info),
+    transports: winston.transports,
+    warn: jest.fn().mockImplementation(winston.warn)
   }
 }
 

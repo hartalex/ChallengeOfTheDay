@@ -244,7 +244,7 @@ module.exports = {
     semi: 'off',
     'semi-spacing': 'error',
     'semi-style': ['error', 'last'],
-    'sort-keys': 'off',
+    'sort-keys': 'error',
     'sort-vars': 'error',
     'space-before-blocks': 'error',
     'space-before-function-paren': 'off',

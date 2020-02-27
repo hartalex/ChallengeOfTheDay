@@ -1,12 +1,12 @@
 module.exports = {
-  slackUrl: 'a',
-  twitter: {
-    consumerKey: process.env.twitterConsumerKey,
-    consumerSecret: process.env.twitterConsumerSecret,
-    accessToken: process.env.twitterAccessToken,
-    accessTokenSecret: process.env.twitterAccessTokenSecret
-  },
-  themeTimeout: 50,
   historyFile: 'history.json',
-  historyMax: 90
+  historyMax: 90,
+  slackUrl: 'a',
+  themeTimeout: 50,
+  twitter: {
+    accessToken: process.env.twitterAccessToken,
+    accessTokenSecret: process.env.twitterAccessTokenSecret,
+    consumerKey: process.env.twitterConsumerKey,
+    consumerSecret: process.env.twitterConsumerSecret
+  }
 }

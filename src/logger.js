@@ -10,13 +10,13 @@ export function configureLogger() {
     ({ level, message, timestamp }) => `${timestamp} ${level}: ${message}`
   )
   logger.configure({
-    level: 'info',
     format: logger.format.combine(
       logger.format.colorize({ all: true }),
       logger.format.errors({ stack: true }),
       logger.format.timestamp(),
       myFormat
     ),
+    level: 'info',
     transports: [new logger.transports.Console()]
   })
 }
