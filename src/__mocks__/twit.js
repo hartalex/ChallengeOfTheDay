@@ -4,4 +4,4 @@ export const innerObject = {
   })
 }
 
-module.exports = jest.fn().mockReturnValue(innerObject)
+export default jest.fn().mockReturnValue(innerObject)

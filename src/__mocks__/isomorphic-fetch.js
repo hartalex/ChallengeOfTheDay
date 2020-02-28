@@ -1,1 +1,1 @@
-module.exports = jest.fn().mockImplementation(() => ({ statusCode: 200 }))
+export default jest.fn().mockImplementation(() => ({ statusCode: 200 }))

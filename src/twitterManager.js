@@ -1,6 +1,6 @@
 import logger from 'winston'
 import { promisify } from 'util'
-const Twitter = require('twit')
+import Twitter from 'twit'
 
 /**
  * Posts a twitter message to the account with the given credentials.

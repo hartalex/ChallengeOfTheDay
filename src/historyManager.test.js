@@ -1,13 +1,13 @@
 jest.mock('fs')
 import fs from 'fs'
 import { HistoryManager } from './historyManager.js'
-const history = new HistoryManager('filename', 1)
 
 /*
  * @group unit
  */
 describe('Test Suite', () => {
   describe('#HistoryManager()', () => {
+    const history = new HistoryManager('filename', 1)
     it('loadHistory Success', () => {
       const expectedHistory = ['history1', 'history2']
       const response = history.loadHistory()

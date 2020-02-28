@@ -1,5 +1,4 @@
 jest.mock('twit')
-jest.mock('./config.js')
 import twit from 'twit'
 import { twitterPost } from './twitterManager.js'
 import config from './config.js'

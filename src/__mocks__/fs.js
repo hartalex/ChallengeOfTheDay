@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   readFile: jest.fn().mockImplementation((_filename, callback) => {
     callback(null, '["history1","history2"]')
   }),

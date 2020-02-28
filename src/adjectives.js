@@ -1,5 +1,5 @@
 /* eslint max-lines: "off" */
-module.exports = [
+export default [
   'abandoned',
   'abashed',
   'aberrant',

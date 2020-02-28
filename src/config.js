@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   historyFile: 'history.json',
   historyMax: 90,
   slackUrl: process.env.slackUrl,
