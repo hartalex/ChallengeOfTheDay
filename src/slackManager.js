@@ -37,7 +37,9 @@ export async function slackPost(slackUrl, theme) {
  */
 function createSlackMessageData(theme) {
   return {
-    text: `Today's challenge theme is *${theme}*\nNeed Inspiration? https://www.pinterest.com/search/pins/?q=${encodeURIComponent()}`
+    text: `Today's challenge theme is *${theme}*\nNeed Inspiration? https://www.pinterest.com/search/pins/?q=${encodeURIComponent(
+      theme
+    )}`
   }
 }
 
