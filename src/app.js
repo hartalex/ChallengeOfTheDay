@@ -1,11 +1,11 @@
 import logger from 'winston'
-import config from './config'
-import themes from './themes'
-import adjectives from './adjectives'
-import { chooseTheme } from './themeManager'
-import { HistoryManager } from './historyManager'
-import { slackPost } from './slackManager'
-import { twitterPost } from './twitterManager'
+import config from './config.js'
+import themes from './themes.js'
+import adjectives from './adjectives.js'
+import { chooseTheme } from './themeManager.js'
+import { HistoryManager } from './historyManager.js'
+import { slackPost } from './slackManager.js'
+import { twitterPost } from './twitterManager.js'
 import { configureLogger } from './logger.js'
 
 /**

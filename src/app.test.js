@@ -2,7 +2,18 @@ jest.mock('fs')
 jest.mock('twit')
 jest.mock('isomorphic-fetch')
 jest.mock('winston')
-jest.mock('./config')
+jest.mock('./config.js', () => ({
+  historyFile: 'fake file',
+  historyMax: 90,
+  slackUrl: 'fake url',
+  themeTimeout: 50,
+  twitter: {
+    accessToken: 'fake token',
+    accessTokenSecret: 'fake token secret',
+    consumerKey: 'fake consumer',
+    consumerSecret: 'fake consumer secret'
+  }
+}))
 import app from './app'
 import fetch from 'isomorphic-fetch'
 import fs from 'fs'
