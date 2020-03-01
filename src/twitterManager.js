@@ -16,12 +16,35 @@ import Twitter from 'twit'
 export async function twitterPost(theme, config) {
   logger.debug('Twitter Post')
   const client = new Twitter(mapConfig2TwitConfig(config))
-  const clientPost = promisify(client.post)
-  await clientPost('statuses/update', {
-    status: `Today's theme is ${theme} \n#artdailies`
-  })
+  const response = await promisifyClientPost(client, theme)
+  logger.debug(`twit response is: ${JSON.stringify(response)}`)
 
   return theme
+}
+
+/**
+ * Wraps the twit post callback function in a promise.
+ *
+ * @param {object} client - The twitter client object built by Twit.
+ * @param {string} theme - The theme to send to twitter in message.
+ * @returns {{data:object,response:object}} - The data and response objects returned from twit.
+ */
+async function promisifyClientPost(client, theme) {
+  return new Promise((resolve, reject) => {
+    client.post(
+      'statuses/update',
+      {
+        status: `Today's theme is ${theme} \n#artdailies`
+      },
+      (err, data, response) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve({ data, response })
+        }
+      }
+    )
+  })
 }
 
 /**
