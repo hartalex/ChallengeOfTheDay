@@ -1,5 +1,4 @@
 import logger from 'winston'
-import { promisify } from 'util'
 import Twitter from 'twit'
 
 /**
