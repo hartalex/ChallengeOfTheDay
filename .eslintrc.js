@@ -291,6 +291,7 @@ module.exports = {
     'jsdoc/require-returns-description': 1, // Recommended
     'jsdoc/require-returns-type': 1, // Recommended
     'jsdoc/valid-types': 1, // Recommended
+    // JEST Plugin Rules
     'jest/consistent-test-it': 'error',
     'jest/expect-expect': 'error',
     'jest/lowercase-name': 'error',
@@ -330,7 +331,33 @@ module.exports = {
     'jest/prefer-to-have-length': 'error',
     'jest/prefer-todo': 'error',
     'jest/require-top-level-describe': 'error',
-    'jest/require-to-throw-message': 'error'
+    'jest/require-to-throw-message': 'error',
+    'node/no-callback-literal': 'error',
+    'node/no-exports-assign': 'error',
+    'node/no-extraneous-import': 'error',
+    'node/no-extraneous-require': 'error',
+    'node/no-missing-import': 'error',
+    'node/no-missing-require': 'error',
+    'node/no-unpublished-bin': 'error',
+    'node/no-unpublished-import': 'error',
+    'node/no-unpublished-require': 'error',
+    'node/no-unsupported-features/es-builtins': 'error',
+    'node/no-unsupported-features/es-syntax': 'off',
+    'node/no-unsupported-features/node-builtins': 'error',
+    'node/process-exit-as-throw': 'error',
+    'node/shebang': 'error',
+    'node/no-deprecated-api': 'error',
+    'node/exports-style': 'error',
+    'node/file-extension-in-import': 'error',
+    'node/prefer-global/buffer': 'error',
+    'node/prefer-global/console': 'error',
+    'node/prefer-global/process': 'error',
+    'node/prefer-global/text-decoder': 'error',
+    'node/prefer-global/text-encoder': 'error',
+    'node/prefer-global/url-search-params': 'error',
+    'node/prefer-global/url': 'error',
+    'node/prefer-promises/dns': 'error',
+    'node/prefer-promises/fs': 'error'
   },
   overrides: [
     {
