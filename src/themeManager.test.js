@@ -1,6 +1,6 @@
-import themes from '../src/themes'
-import adjectives from '../src/adjectives'
-import { chooseTheme, __RewireAPI__ } from '../src/themeManager'
+import themes from '../src/themes.js'
+import adjectives from '../src/adjectives.js'
+import { chooseTheme, __RewireAPI__ } from '../src/themeManager.js'
 
 /*
  * @group unit

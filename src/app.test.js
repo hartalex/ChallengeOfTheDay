@@ -14,7 +14,7 @@ jest.mock('./config.js', () => ({
     consumerSecret: 'fake consumer secret'
   }
 }))
-import app from './app'
+import app from './app.js'
 import fetch from 'isomorphic-fetch'
 import fs from 'fs'
 import logger from 'winston'
