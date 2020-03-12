@@ -318,7 +318,7 @@ module.exports = {
     'jest/valid-title': 'error',
     'jest/no-alias-methods': 'error',
     'jest/prefer-called-with': 'error',
-    'jest/prefer-expect-assertions': 'error',
+    'jest/prefer-expect-assertions': 'off',
     'jest/prefer-to-be-null': 'error',
     'jest/prefer-inline-snapshots': 'error',
     'jest/prefer-spy-on': 'error',

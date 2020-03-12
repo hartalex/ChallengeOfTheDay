@@ -22,27 +22,28 @@ import logger from 'winston'
 /*
  * @group unit
  */
-describe('Test Suite', () => {
-  describe('#App()', () => {
-    it('Success', async () => {
+describe('test suite', () => {
+  describe('app()', () => {
+    it('success', async () => {
       await app()
       expect(logger.error).not.toHaveBeenCalled()
       expect(logger.debug).toHaveBeenCalledWith('Done')
     })
 
-    it('Failure due to slackManager failing to post', async () => {
+    it('failure due to slackManager failing to post', async () => {
       fetch.mockImplementationOnce(() => {
         throw new Error('Mock Error')
       })
       await app()
+      expect(logger.error).toHaveBeenCalledWith('Mock Error')
     })
 
-    it('Failure due to historyManager failing to load', async () => {
+    it('failure due to historyManager failing to load', async () => {
       fs.readFile.mockImplementationOnce((_filename, callback) => {
         callback(new Error('Mock Error'))
       })
       await app()
-      expect(logger.error).toHaveBeenCalled()
+      expect(logger.error).toHaveBeenCalledWith('Mock Error')
     })
   })
 })

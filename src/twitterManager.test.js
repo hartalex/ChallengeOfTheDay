@@ -5,8 +5,8 @@ import config from './config.js'
 /*
  * @group unit
  */
-describe('Test Suite', () => {
-  describe('#TwitterManager()', () => {
+describe('test suite', () => {
+  describe('twitterManager()', () => {
     it('twitterPost Success', async () => {
       const theme = 'Testy McTestFace'
       const response = await twitterPost(theme, config.twitter)
@@ -19,7 +19,7 @@ describe('Test Suite', () => {
         callback(new Error('Mock Error'), 'Mock Tweet', 'Mock Response')
       })
 
-      return expect(twitterPost(theme, config.twitter)).rejects.toThrowError(
+      await expect(twitterPost(theme, config.twitter)).rejects.toThrow(
         'Mock Error'
       )
     })

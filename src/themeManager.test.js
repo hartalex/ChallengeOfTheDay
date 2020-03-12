@@ -5,39 +5,40 @@ import { chooseTheme, __RewireAPI__ } from '../src/themeManager'
 /*
  * @group unit
  */
-describe('Test Suite', () => {
-  describe('#ThemeManager()', () => {
-    it('Fail - Empty Array', () =>
+describe('test suite', () => {
+  describe('themeManager()', () => {
+    it('fail - empty adjectives array', () =>
       expect(
         chooseTheme({ adjectives: [], themes: [] }, null, 2)
-      ).rejects.toThrowError('adjectives parameter array is empty'))
+      ).rejects.toThrow('adjectives parameter array is empty'))
 
-    it('Fail - Adjectives Not an Array', () =>
+    it('fail - Adjectives Not an Array', () =>
       expect(
         chooseTheme({ adjectives: '', themes: '' }, null, 2)
-      ).rejects.toThrowError('adjectives parameter is not an array'))
+      ).rejects.toThrow('adjectives parameter is not an array'))
 
-    it('Fail - Empty Array', () =>
+    it('fail - empty themes array', () =>
       expect(
         chooseTheme({ adjectives: ['adj'], themes: [] }, null, 2)
-      ).rejects.toThrowError('themes parameter array is empty'))
+      ).rejects.toThrow('themes parameter array is empty'))
 
-    it('Fail - Themes Not an Array', () =>
+    it('fail - themes not an array', () =>
       expect(
         chooseTheme({ adjectives: ['adj'], themes: '' }, null, 2)
-      ).rejects.toThrowError('themes parameter is not an array'))
+      ).rejects.toThrow('themes parameter is not an array'))
 
-    it('Fail - History Too Full', () =>
+    it('fail - history too full', () =>
       expect(
         chooseTheme({ adjectives: ['adj'], themes: ['test'] }, ['test'], 2)
-      ).rejects.toThrowError(
+      ).rejects.toThrow(
         'History parameter array is greater than or equal to themes parameter array.\n No New Themes Will Be Found'
       ))
 
-    it('Success', () =>
-      expect(chooseTheme({ adjectives, themes })).resolves.toBeDefined())
+    it('success', async () => {
+      expect(await chooseTheme({ adjectives, themes })).toBeDefined()
+    })
 
-    it('Success where theme manager has to retry because of a history collision', () => {
+    it('success where theme manager has to retry because of a history collision', () => {
       const history = ['Testy McTestFace']
       try {
         __RewireAPI__.__Rewire__(
@@ -56,7 +57,7 @@ describe('Test Suite', () => {
       }
     })
 
-    it('Failure where theme manager times out because of too many history collisions', () => {
+    it('failure where theme manager times out because of too many history collisions', () => {
       const history = ['Testy McTestFace']
       try {
         __RewireAPI__.__Rewire__(
@@ -66,7 +67,7 @@ describe('Test Suite', () => {
 
         return expect(
           chooseTheme({ adjectives, themes }, history)
-        ).rejects.toThrowError('Theme Chooser Timed out')
+        ).rejects.toThrow('Theme Chooser Timed out')
       } finally {
         __RewireAPI__.__ResetDependency__('getRandomTheme')
       }

@@ -33,6 +33,6 @@ export default async function() {
     await historyManager.saveHistory()
     logger.debug('Done')
   } catch (error) {
-    logger.error(error)
+    logger.error(error.message)
   }
 }

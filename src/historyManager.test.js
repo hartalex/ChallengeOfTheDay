@@ -5,15 +5,15 @@ import { HistoryManager } from './historyManager.js'
 /*
  * @group unit
  */
-describe('Test Suite', () => {
-  describe('#HistoryManager()', () => {
+describe('test Suite', () => {
+  describe('historymanager()', () => {
     const history = new HistoryManager('filename', 1)
     it('loadHistory Success', () => {
       const expectedHistory = ['history1', 'history2']
       const response = history.loadHistory()
       expect(response).toStrictEqual(expectedHistory)
     })
-    it('loadHistory Failure', () => {
+    it('loadHistory failure', () => {
       fs.readFileSync.mockImplementationOnce(() => {
         throw new Error('Mock Error')
       })
@@ -22,13 +22,13 @@ describe('Test Suite', () => {
       const response = history.loadHistory()
       expect(response).toStrictEqual(expectedHistory)
     })
-    it('addHistory Success', () => {
+    it('addHistory success', () => {
       const historyArray = []
       const response = history.addHistory('Testy McTestFace', historyArray)
       expect(response).toStrictEqual(['Testy McTestFace'])
     })
 
-    it('addHistory Success and item falls off array', () => {
+    it('addHistory success and item falls off array', () => {
       const historyArray = []
       const response = history.addHistory('Testy McTestFace', historyArray)
       expect(response).toStrictEqual(['Testy McTestFace'])
@@ -46,9 +46,9 @@ describe('Test Suite', () => {
         throw new Error('Mock Error')
       })
 
-      return expect(() => {
+      expect(() => {
         history.saveHistory()
-      }).toThrowError('Mock Error')
+      }).toThrow('Mock Error')
     })
   })
 })
