@@ -7,29 +7,42 @@ import { chooseTheme, __RewireAPI__ } from '../src/themeManager.js'
  */
 describe('test suite', () => {
   describe('themeManager()', () => {
+    const themeChooserTimeout = 2
     it('fail - empty adjectives array', () =>
       expect(
-        chooseTheme({ adjectives: [], themes: [] }, null, 2)
+        chooseTheme({ adjectives: [], themes: [] }, null, themeChooserTimeout)
       ).rejects.toThrow('adjectives parameter array is empty'))
 
     it('fail - Adjectives Not an Array', () =>
       expect(
-        chooseTheme({ adjectives: '', themes: '' }, null, 2)
+        chooseTheme({ adjectives: '', themes: '' }, null, themeChooserTimeout)
       ).rejects.toThrow('adjectives parameter is not an array'))
 
     it('fail - empty themes array', () =>
       expect(
-        chooseTheme({ adjectives: ['adj'], themes: [] }, null, 2)
+        chooseTheme(
+          { adjectives: ['adj'], themes: [] },
+          null,
+          themeChooserTimeout
+        )
       ).rejects.toThrow('themes parameter array is empty'))
 
     it('fail - themes not an array', () =>
       expect(
-        chooseTheme({ adjectives: ['adj'], themes: '' }, null, 2)
+        chooseTheme(
+          { adjectives: ['adj'], themes: '' },
+          null,
+          themeChooserTimeout
+        )
       ).rejects.toThrow('themes parameter is not an array'))
 
     it('fail - history too full', () =>
       expect(
-        chooseTheme({ adjectives: ['adj'], themes: ['test'] }, ['test'], 2)
+        chooseTheme(
+          { adjectives: ['adj'], themes: ['test'] },
+          ['test'],
+          themeChooserTimeout
+        )
       ).rejects.toThrow(
         'History parameter array is greater than or equal to themes parameter array.\n No New Themes Will Be Found'
       ))

@@ -1,4 +1,10 @@
 import logger from 'winston'
+const defaultTimeout = 50
+const indexNotFound = -1
+const incrementAmount = 1
+const emptyArrayLength = 0
+const indexOfFirstCharacter = 0
+const indexOfSecondCharacter = 1
 /**
  * Creates a theme string using the list of adjectives and themes, and the provided history.
  *
@@ -9,7 +15,11 @@ import logger from 'winston'
  * @param {number} timeoutMax - The max amount of times to try to generate a unique theme.
  * @returns {string} - The generated theme string.
  */
-export async function chooseTheme(inputs, history = [], timeoutMax = 50) {
+export async function chooseTheme(
+  inputs,
+  history = [],
+  timeoutMax = defaultTimeout
+) {
   const { adjectives, themes } = inputs
   logger.debug('Choosing theme')
   validateParams(adjectives, themes, history)
@@ -17,9 +27,12 @@ export async function chooseTheme(inputs, history = [], timeoutMax = 50) {
   let timeoutIndex = 0
   let chosenTheme = getRandomTheme(adjectives, themes)
 
-  // Loop has a timeout just incase of a bug
-  while (history.indexOf(chosenTheme) !== -1 && timeoutIndex++ < timeoutMax) {
+  while (
+    history.indexOf(chosenTheme) !== indexNotFound &&
+    timeoutIndex < timeoutMax
+  ) {
     chosenTheme = getRandomTheme(adjectives, themes)
+    timeoutIndex += incrementAmount
   }
 
   if (timeoutIndex >= timeoutMax) {
@@ -78,7 +91,7 @@ function validateParams(adjectives, themes, history) {
 function validateArray(array, name) {
   if (!Array.isArray(array)) {
     throw new Error(`${name} parameter is not an array`)
-  } else if (array.length === 0) {
+  } else if (array.length === emptyArrayLength) {
     throw new Error(`${name} parameter array is empty`)
   }
 }
@@ -91,5 +104,8 @@ function validateArray(array, name) {
  * @returns {string} - The passed in string with the first character changed to uppercase.
  */
 function jsUcfirst(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1)
+  return (
+    string.charAt(indexOfFirstCharacter).toUpperCase() +
+    string.slice(indexOfSecondCharacter)
+  )
 }

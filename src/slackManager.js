@@ -1,6 +1,8 @@
 import logger from 'winston'
 import fetch from 'isomorphic-fetch'
 
+const httpResponseOk = 200
+const httpResponseRedirect = 300
 /**
  * Posts a slack message to the given slackUrl.
  *
@@ -50,7 +52,10 @@ function createSlackMessageData(theme) {
  * @returns {undefined}
  */
 function validateFetch(response) {
-  if (response.status < 200 || response.status >= 300) {
+  if (
+    response.status < httpResponseOk ||
+    response.status >= httpResponseRedirect
+  ) {
     const error = new Error(response.statusText)
     error.response = response
     throw error

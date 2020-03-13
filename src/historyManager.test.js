@@ -7,7 +7,8 @@ import { HistoryManager } from './historyManager.js'
  */
 describe('test Suite', () => {
   describe('historymanager()', () => {
-    const history = new HistoryManager('filename', 1)
+    const historyMax = 1
+    const history = new HistoryManager('filename', historyMax)
     it('loadHistory Success', () => {
       const expectedHistory = ['history1', 'history2']
       const response = history.loadHistory()
