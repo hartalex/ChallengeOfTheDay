@@ -66,8 +66,5 @@ package-lock.json
 #coverage
 lcov.info
 
-#build folder
-build/
-
 #jsdoc folder
 out/

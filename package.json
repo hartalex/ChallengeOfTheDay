@@ -2,7 +2,7 @@
   "name": "challengeoftheday",
   "version": "1.0.0",
   "description": "Theme generator for the #challenges channel of the MadisonGameDev Slack Group",
-  "main": "index.js",
+  "main": "build/index.js",
   "scripts": {
     "test": "jest --watch --silent --group=unit",
     "integration-test": "jest --watch --silent --group=integration",
@@ -46,7 +46,8 @@
     "isomorphic-fetch": "2.2.1",
     "es6-promise": "4.2.8",
     "twit": "2.2.11",
-    "winston": "3.2.1"
+    "winston": "3.2.1",
+    "@google-cloud/pubsub": "^0.18.0"
   },
   "jest": {
     "setupFiles": [
