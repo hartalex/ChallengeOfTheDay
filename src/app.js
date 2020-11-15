@@ -13,7 +13,7 @@ import { configureLogger } from './logger.js'
  *
  * @returns {undefined}
  */
-export default async function() {
+export default async function () {
   try {
     configureLogger()
     const historyManager = new HistoryManager(

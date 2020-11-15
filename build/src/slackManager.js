@@ -4,7 +4,7 @@
  * @param {string} slackUrl - The slack api url to post messages to.
  * @param {string} theme - The theme to send to slack in message.
  * @returns {string} - The given theme string.
- */async function slackPost(slackUrl,theme){_get__("logger").debug('Slack Post');if(typeof slackUrl==='undefined'||slackUrl===''||slackUrl===null){throw new Error('Slack URL is not defined in config.js');}const response=await _get__("fetch")(slackUrl,{body:JSON.stringify(_get__("createSlackMessageData")(theme)),headers:{'Content-Type':'application/json'},method:'POST',timeout:3000});_get__("validateFetch")(response);// Sending to Slack was successful
+ */async function slackPost(slackUrl,theme){_get__("logger").debug('Slack Post');if(typeof slackUrl==='undefined'||slackUrl===''||slackUrl===null){throw new Error('Slack URL is not defined in config.js');}const response=await _get__("fetch")(slackUrl,{body:JSON.stringify(_get__("createSlackMessageData")(theme)),headers:{'Content-Type':'application/json'},method:'POST',timeout:15000});_get__("validateFetch")(response);// Sending to Slack was successful
 _get__("logger").debug('SlackPost Done');return theme;}/**
  * Creates a slack message data object to send to Slacks Api.
  *

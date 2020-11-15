@@ -15,12 +15,11 @@ export async function slackPost(slackUrl, theme) {
   if (typeof slackUrl === 'undefined' || slackUrl === '' || slackUrl === null) {
     throw new Error('Slack URL is not defined in config.js')
   }
-
   const response = await fetch(slackUrl, {
     body: JSON.stringify(createSlackMessageData(theme)),
     headers: { 'Content-Type': 'application/json' },
     method: 'POST',
-    timeout: 3000
+    timeout: 15000
   })
 
   validateFetch(response)
