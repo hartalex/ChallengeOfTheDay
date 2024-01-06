@@ -3,7 +3,6 @@ import Twitter from 'twit'
 
 /**
  * Posts a twitter message to the account with the given credentials.
- *
  * @param {string} theme - The theme to send to twitter in message.
  * @param {object} config - Configuration object.
  * @param {string} config.consumerKey - The twitter api consumer key.
@@ -23,7 +22,6 @@ export async function twitterPost(theme, config) {
 
 /**
  * Wraps the twit post callback function in a promise.
- *
  * @param {object} client - The twitter client object built by Twit.
  * @param {string} theme - The theme to send to twitter in message.
  * @returns {{data:object,response:object}} - The data and response objects returned from twit.
@@ -33,7 +31,7 @@ async function promisifyClientPost(client, theme) {
     client.post(
       'statuses/update',
       {
-        status: `Today's theme is ${theme} \n#artdailies`
+        status: `Today's theme is ${theme} \n#artdailies`,
       },
       (err, data, response) => {
         if (err) {
@@ -48,7 +46,6 @@ async function promisifyClientPost(client, theme) {
 
 /**
  * Converts our configuration options to twitter config object.
- *
  * @param {object} config - Configuration object.
  * @param {string} config.consumerKey - The twitter api consumer key.
  * @param {string} config.consumerSecret - The twitter api consumer secret.
@@ -62,13 +59,13 @@ function mapConfig2TwitConfig(config) {
     consumerKey: consumer_key,
     consumerSecret: consumer_secret,
     accessToken: access_token,
-    accessTokenSecret: access_token_secret
+    accessTokenSecret: access_token_secret,
   } = config
 
   return {
     access_token,
     access_token_secret,
     consumer_key,
-    consumer_secret
+    consumer_secret,
   }
 }

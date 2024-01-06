@@ -10,7 +10,6 @@ import { configureLogger } from './logger.js'
 
 /**
  * The entry point of the application.
- *
  * @returns {undefined}
  */
 export default async function () {

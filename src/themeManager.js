@@ -7,7 +7,6 @@ const indexOfFirstCharacter = 0
 const indexOfSecondCharacter = 1
 /**
  * Creates a theme string using the list of adjectives and themes, and the provided history.
- *
  * @param {object} inputs - An object of input arrays.
  * @param {Array.<string>} inputs.adjectives - A list of adjectives.
  * @param {Array.<string>} inputs.themes - A list of themes.
@@ -46,7 +45,6 @@ export async function chooseTheme(
 
 /**
  * Creates a theme by combining a random adjective and a random theme.
- *
  * @access private
  * @param {Array} adjectives - An array of string adjectives.
  * @param {Array} themes - An array of string themes.
@@ -65,7 +63,6 @@ function getRandomTheme(adjectives, themes) {
 
 /**
  * Validates adjectives, themes, and history parameters.
- *
  * @param {Array.<string>} adjectives - A list of adjectives.
  * @param {Array.<string>} themes - A list of themes.
  * @param {Array.<string>} history - A list of themes created previously. Used to weed out duplicates.
@@ -83,7 +80,6 @@ function validateParams(adjectives, themes, history) {
 
 /**
  * Validates an Array.
- *
  * @param {Array.<string>} array - The array to validate.
  * @param {string} name - The name of the array used in error messages.
  * @returns {undefined}
@@ -98,7 +94,6 @@ function validateArray(array, name) {
 
 /**
  * Transforms the passed in string and makes the first character uppercase.
- *
  * @access private
  * @param {string} string - The string to transform.
  * @returns {string} - The passed in string with the first character changed to uppercase.

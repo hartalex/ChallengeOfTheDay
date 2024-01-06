@@ -1,7 +1,7 @@
 import logger from 'winston'
+
 /**
  * Sets up winston for logging.
- *
  * @returns {undefined}
  */
 export function configureLogger() {
@@ -17,6 +17,6 @@ export function configureLogger() {
       myFormat
     ),
     level: 'info',
-    transports: [new logger.transports.Console()]
+    transports: [new logger.transports.Console()],
   })
 }

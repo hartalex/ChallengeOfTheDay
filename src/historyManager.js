@@ -3,7 +3,6 @@ import fs from 'fs'
 
 /**
  * Builds a history manager object.
- *
  * @class HistoryManager
  * @param {string} historyFile - A file name to load and save history data to.
  * @param {number} historyMax - The maximum number of history items to store in the history file.
@@ -17,7 +16,6 @@ export class HistoryManager {
 
   /**
    * Loads a string array of from the historyFile which is stored in the json format.
-   *
    * @memberof HistoryManager
    * @instance
    * @returns {Array.<string>} - The history loaded from the file.
@@ -37,7 +35,6 @@ export class HistoryManager {
 
   /**
    * Adds a new string {theme} to the array history, if the array is larger than historyMax then the oldest string is bumped off the array.
-   *
    * @memberof HistoryManager
    * @instance
    * @param {string} theme - The string to add to the history array.
@@ -58,7 +55,6 @@ export class HistoryManager {
 
   /**
    * Saves a string array to the historyFile in the json format.
-   *
    * @memberof HistoryManager
    * @instance
    * @returns {undefined}
